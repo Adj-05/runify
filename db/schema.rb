@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_02_27_202656) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_01_112513) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,11 +19,11 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_27_202656) do
     t.string "genre"
     t.integer "duration"
     t.integer "bpm"
+    t.string "title"
     t.index ["playlist_id"], name: "index_musics_on_playlist_id"
   end
 
   create_table "playlists", force: :cascade do |t|
-    t.boolean "favorite", default: false
     t.string "name"
   end
 
@@ -37,6 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_02_27_202656) do
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "favorite_playlist"
     t.index ["playlist_id"], name: "index_trainings_on_playlist_id"
     t.index ["user_id"], name: "index_trainings_on_user_id"
   end
