@@ -9,24 +9,27 @@ user3 = User.new(email: "aurelie@runify.com", password: "123456", password_confi
 user3.save!
 
 
+Playlist.destroy_all
+playlist1 = Playlist.new(name: "Rap dynamique")
+playlist1.save!
+playlist2 = Playlist.new(name: "Rock dynamique")
+playlist2.save!
+
+
+
 Music.destroy_all
-music1 = Music.new(genre: "Rap", duration: "1min30", bpm: "140bpm")
+music1 = Music.new(title: "Kiai", genre: "rap", duration: "130", bpm: "140", playlist_id: playlist1.id)
 music1.save!
-music2 = Music.new(genre: "Rock", duration: "1min43", bpm: "90bpm")
+music2 = Music.new(title: "Kokk", genre: "rap", duration: "176", bpm: "90", playlist_id:  playlist1.id)
 music2.save!
-music3 = Music.new(genre: "Pop", duration: "2min20", bpm: "100bpm")
+music3 = Music.new(title: "ppop", genre: "rock", duration: "140", bpm: "100", playlist_id:  playlist2.id)
 music3.save!
 
 
 Training.destroy_all
-training1 = Training.new(average_speed: "10km/h", training_duration: "15min", music_genre: "Rap", name: "Rap training", user_id: User.last.id)
+training1 = Training.new(average_speed: "10", training_duration: "150", music_genre: "rap", name: "Rap training", user_id: User.last.id, playlist_id: playlist1.id)
 training1.save!
-training2 = Training.new(average_speed: "20km/h", training_duration: "10min", music_genre: "Rock", name: "Rock training", user_id: User.last.id)
+training2 = Training.new(average_speed: "20", training_duration: "100", music_genre: "rap", name: "rap training 2", user_id: User.last.id, playlist_id: playlist1.id)
 training2.save!
-training3 = Training.new(average_speed: "15km/h", training_duration: "25min", music_genre: "Pop", name: "Pop training", user_id: User.last.id)
+training3 = Training.new(average_speed: "15", training_duration: "250", music_genre: "rock", name: "rock training", user_id: User.last.id, playlist_id: playlist2.id)
 training3.save!
-
-
-Playlist.destroy_all
-playlist1 = Playlist.new(favorite: "true")
-playlist1.save!
