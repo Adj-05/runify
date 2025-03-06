@@ -20,4 +20,36 @@ class Training < ApplicationRecord
     end
   end
 
+  def generate_playlist(average_speed, training_duration, music_genre)
+
+  when 'slow'
+    bpm_min = 100
+    bpm_max = 120
+  when 'medium'
+    bpm_min = 121
+    bpm_max = 140
+  when 'fast'
+    bpm_min = 141
+    bpm_max = 160
+
+  sql = "SELECT * FROM tracks WHERE genre = '#{genre}' AND bpm BETWEEN #{bpm_min} AND #{bpm_max} ORDER BY RANDOM()"
+
+  tracks = DB.execute(sql)
+
+  playlist = []
+  total_duration = 0
+  target_duration = training_duration * 60
+
+  musics.each do |music|
+    music_duration = music["duration"]
+    if total_duration + music_duration <= target_duration
+      playlist << music
+      total_duration += music_duration
+    end
+    break if total_duration >= target_duration
+  end
+
+
+  end
+
 end
