@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_01_132540) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_06_195513) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,13 +23,23 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_01_132540) do
     t.index ["playlist_id"], name: "index_musics_on_playlist_id"
   end
 
+  create_table "playlist_musics", force: :cascade do |t|
+    t.bigint "playlists_id", null: false
+    t.bigint "musics_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["musics_id"], name: "index_playlist_musics_on_musics_id"
+    t.index ["playlists_id"], name: "index_playlist_musics_on_playlists_id"
+  end
+
   create_table "playlists", force: :cascade do |t|
     t.string "name"
+    t.bigint "training_id"
+    t.index ["training_id"], name: "index_playlists_on_training_id"
   end
 
   create_table "trainings", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "playlist_id", null: false
     t.integer "average_speed"
     t.integer "training_duration"
     t.string "music_genre"
@@ -38,7 +48,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_01_132540) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "favorite_playlist"
-    t.index ["playlist_id"], name: "index_trainings_on_playlist_id"
     t.index ["user_id"], name: "index_trainings_on_user_id"
   end
 
@@ -55,6 +64,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_01_132540) do
   end
 
   add_foreign_key "musics", "playlists"
-  add_foreign_key "trainings", "playlists"
+  add_foreign_key "playlist_musics", "musics", column: "musics_id"
+  add_foreign_key "playlist_musics", "playlists", column: "playlists_id"
+  add_foreign_key "playlists", "trainings"
   add_foreign_key "trainings", "users"
 end
