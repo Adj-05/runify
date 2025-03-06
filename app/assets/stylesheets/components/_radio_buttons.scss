@@ -1,5 +1,6 @@
 .category-wrapper {
   display: flex;
+  height: calc(100svh - 66px);
   flex-direction: column;
   justify-content: space-between;
 }
@@ -32,12 +33,12 @@
 
 
 .category-selector + label {
-  color: #FD1015;
+  color: #7a118d;
 }
 
 .category-selector:checked + label {
-  background-color: #FD1015;
-  border-color: #FD1015;
+  background-color: #7a118d;
+  border-color: #7a118d;
 }
 
 
