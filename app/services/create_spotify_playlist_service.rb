@@ -17,10 +17,11 @@ class CreateSpotifyPlaylistService < ApplicationService
 
   def call
     playlist = create_playlist
-    add_tracks_to_playlist(playlist['id'])
-    playlist
-  rescue StandardError => e
-    puts backtrace.join("/n")
+    playlist_id = playlist['id']
+
+    add_tracks_to_playlist(playlist_id)
+
+    get_playlist(playlist_id)
   end
 
   private
@@ -33,17 +34,27 @@ class CreateSpotifyPlaylistService < ApplicationService
 
   def create_playlist
     url = "#{BASE_URL}/users/#{@user_spotify_id}/playlists"
-    headers = { 'Authorization' => "Bearer #{@access_token}" }
     body = { name:, description:, public: true }
-    response = request(:post, url, headers:, body:)
-    response.parsed_response
+
+    request_with_auth(:post, url, body:)
   end
 
   def add_tracks_to_playlist(playlist_id)
     url = "#{BASE_URL}/playlists/#{playlist_id}/tracks"
-    headers = { 'Authorization' => "Bearer #{@access_token}" }
     body = { uris: @tracks_spotify_uris }
-    response = request(:post, url, headers:, body:)
-    response.parsed_response
+
+    request_with_auth(:post, url, body:)
+  end
+
+  def get_playlist(playlist_id)
+    url = "#{BASE_URL}/playlists/#{playlist_id}"
+
+    request_with_auth(:get, url)
+  end
+
+  def request_with_auth(method, url, body: nil)
+    headers = { 'Authorization' => "Bearer #{@access_token}" }
+
+    request(method, url, headers:, body:).parsed_response
   end
 end

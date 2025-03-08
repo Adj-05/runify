@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_03_08_153850) do
+ActiveRecord::Schema[7.1].define(version: 2025_03_08_185418) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,6 +20,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_08_153850) do
     t.integer "duration"
     t.integer "bpm"
     t.string "title"
+    t.string "spotify_id"
+    t.string "spotify_url"
+    t.string "spotify_uri"
     t.index ["playlist_id"], name: "index_musics_on_playlist_id"
   end
 
@@ -35,6 +38,9 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_08_153850) do
   create_table "playlists", force: :cascade do |t|
     t.string "name"
     t.bigint "training_id"
+    t.string "spotify_id"
+    t.string "spotify_url"
+    t.string "spotify_uri"
     t.index ["training_id"], name: "index_playlists_on_training_id"
   end
 

@@ -4,15 +4,14 @@
       <%= button_to omniauth_authorize_path(resource_name, provider),
                     method: :post,
                     data: {turbo: "false"},
-                    class: 'btn btn-gray px-8 mb-2 mx-auto block w-full xl:w-2/3' do %>
+                    class: 'btn btn-primary' do %>
         <%= image_tag "omniauth/#{OmniAuth::Utils.camelize(provider).downcase}.svg",
                       alt: "#{OmniAuth::Utils.camelize(provider).downcase} icon",
                       class: 'h-8 inline mr-4',
-                      style: 'filter: invert(94%) sepia(8%) saturate(158%) hue-rotate(176deg) brightness(81%) contrast(95%)'
+                      height: 32
         %>
-        <%= @omniauth_names[provider.to_sym] %>
+        <%= provider.to_s.titleize %>
       <% end %>
-
     <% end %>
   <% end %>
 </div>

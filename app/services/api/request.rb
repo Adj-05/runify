@@ -1,10 +1,7 @@
 module Api::Request
   def request(method, url, body: nil, headers: {})
     default_headers = { 'Content-Type' => 'application/json' }
-
-    headers = default_headers.merge(headers)
-
-    options = { headers: }
+    options = { headers: default_headers.merge(headers) }
 
     if method == :post && body.present?
       options[:body] = body.to_json
@@ -12,11 +9,9 @@ module Api::Request
 
     response = HTTParty.send(method, url, options)
 
-    if response.success?
-      return response
-    else
-      Rails.logger.error("API error: #{response.body}")
-      raise StandardError, "API request failed with status #{response.code}: #{response.body}"
-    end
+    return response if response.success?
+
+    Rails.logger.error("API error: #{response.body}")
+    raise StandardError, "API request failed with status #{response.code}: #{response.body}"
   end
 end
