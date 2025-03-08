@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   get 'playlists/index'
   get 'playlists/show'
   get 'playlists/destroy'
-  devise_for :users
+  devise_for :users, controllers: {
+    omniauth_callbacks: "users/omniauth_callbacks"
+  }
   root to: "pages#home"
   get "up" => "rails/health#show", as: :rails_health_check
 
