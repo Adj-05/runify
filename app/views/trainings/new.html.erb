@@ -1,14 +1,15 @@
-
+<div class="container">
   <%= simple_form_for @training do |f| %>
-  <div class="vh-100">
-    <%= f.input :average_speed,
-              as: :radio_buttons,
-              collection_wrapper_tag: 'div',
-              collection_wrapper_class: 'category-wrapper',
-              item_wrapper_class: 'category-item',
-              input_html: {class: 'category-selector'},collection: Training::AVERAGE_SPEED %>
-        </div>
-    <%#= f.input :training_duration, collection: Training::TRAINING_DURATION %>
-    <%#= f.input :music_genre, collection: Music::MUSIC_GENRE %>
-    <%= f.submit %>
+    <div class="vh-100">
+      <%= f.input :average_speed,
+                as: :radio_buttons,
+                collection_wrapper_tag: 'div',
+                collection_wrapper_class: 'category-wrapper',
+                item_wrapper_class: 'category-item',
+                input_html: {class: 'category-selector'},collection: Training::AVERAGE_SPEED %>
+    </div>
+      <%#= f.input :training_duration, collection: Training::TRAINING_DURATION %>
+      <%#= f.input :music_genre, collection: Music::MUSIC_GENRE %>
+      <%= f.submit %>
   <% end %>
+</div>

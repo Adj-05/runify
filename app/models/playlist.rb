@@ -1,4 +1,4 @@
 class Playlist < ApplicationRecord
   has_many :musics
-  has_many :trainings
+  belongs_to :training
 end

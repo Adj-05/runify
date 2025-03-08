@@ -1,6 +1,6 @@
 class Training < ApplicationRecord
   belongs_to :user
-  belongs_to :playlist
+  has_many :playlists
 
   AVERAGE_SPEED = ["Slow : 7.1 to 8.3 mins/KM", "Medium : 5.3 to 6.5 mins/KM", "Fast : 4 to 5.1 mins/KM"]
 
