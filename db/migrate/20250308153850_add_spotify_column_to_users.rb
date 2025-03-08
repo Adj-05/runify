@@ -3,5 +3,6 @@ class AddSpotifyColumnToUsers < ActiveRecord::Migration[7.1]
     add_column :users, :spotify_name, :string
     add_column :users, :spotify_token, :string
     add_column :users, :spotify_refresh_token, :string
+    add_column :users, :spotify_id, :string
   end
 end

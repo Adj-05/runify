@@ -2,11 +2,13 @@ module Users
   module Omniauth
     module Spotify
       def from_spotify(auth)
+        binding.pry
         email = email_from_auth(auth)
         base_attributes = {
           spotify_name: auth.info.name,
           spotify_token: auth.credentials.token,
-          spotify_refresh_token: auth.credentials.refresh_token
+          spotify_refresh_token: auth.credentials.refresh_token,
+          spotify_id: auth.extra.raw_info.id
         }
         if user = find_by(email:)
           user.update(**base_attributes)
