@@ -1,0 +1,17 @@
+<div>
+  <% if devise_mapping.omniauthable? %>
+    <% resource_class.omniauth_providers.each do |provider| %>
+      <%= button_to omniauth_authorize_path(resource_name, provider),
+                    method: :post,
+                    data: {turbo: "false"},
+                    class: 'btn btn-primary' do %>
+        <%= image_tag "omniauth/#{OmniAuth::Utils.camelize(provider).downcase}.svg",
+                      alt: "#{OmniAuth::Utils.camelize(provider).downcase} icon",
+                      class: 'h-8 inline mr-4',
+                      height: 32
+        %>
+        <%= provider.to_s.titleize %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

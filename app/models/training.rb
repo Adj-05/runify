@@ -6,8 +6,8 @@ class Training < ApplicationRecord
 
   TRAINING_DURATION = ["10", "20", "30", "45", "60", "90", "120"]
 
-  validates :average_speed, presence: true, inclusion: { in: AVERAGE_SPEED }
-  validates :training_duration, presence: true, inclusion: { in: TRAINING_DURATION }
+  # validates :average_speed, presence: true, inclusion: { in: AVERAGE_SPEED }
+  # validates :training_duration, presence: true, inclusion: { in: TRAINING_DURATION }
   validates :music_genre, presence: true, inclusion: { in: Music::MUSIC_GENRE }
   validates :name, presence: true
 
