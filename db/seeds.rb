@@ -16,6 +16,8 @@ playlist2 = Playlist.new(name: "Rock dynamique")
 playlist2.save!
 
 
+RSpotify.<
+
 
 Music.destroy_all
 music1 = Music.new(title: "Bolide allemand", genre: "rap", duration: 176, bpm: 132, playlist_id: playlist1.id)

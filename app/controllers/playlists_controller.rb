@@ -31,6 +31,9 @@ class PlaylistsController < ApplicationController
     tempo_features = features_map[tempo] || {}
 
     results = RSpotify::Recommendations.generate(
+      min_tempo: bpm_min,
+      max_tempo: max_tempo,
+
       seed_genres: [genre],
       target_energy: mood_features[:energy],
       target_valence: mood_features[:valence],
