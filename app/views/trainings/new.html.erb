@@ -8,8 +8,8 @@
                 item_wrapper_class: 'category-item',
                 input_html: {class: 'category-selector'},collection: Training::AVERAGE_SPEED %>
     </div>
-      <%#= f.input :training_duration, collection: Training::TRAINING_DURATION %>
-      <%#= f.input :music_genre, collection: Music::MUSIC_GENRE %>
+      <%= f.input :training_duration, collection: Training::TRAINING_DURATION %>
+      <%= f.input :music_genre, collection: Music::MUSIC_GENRE %>
       <%= f.submit %>
   <% end %>
 </div>
