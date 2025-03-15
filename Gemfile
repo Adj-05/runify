@@ -55,6 +55,8 @@ gem 'omniauth'
 gem 'omniauth-spotify'
 gem 'httparty'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
+gem "simple_calendar", "~> 2.4"
+
 group :development, :test do
   gem "dotenv-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

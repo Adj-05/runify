@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <div class="card text-center shadow-lg p-4 border-0 rounded-4">
+    <h5 class="mt-2 fw-bold"><%= current_user.spotify_name %></h5>
+    <div class="position-relative d-flex justify-content-center my-3">
+      <div class="progress-circle border border-3 border-primary-subtle rounded-circle d-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
+        <h4 class="fw-bold"><%= current_user.trainings.count %> sessions🔥</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-grid gap-2 my-3">
+    <%= link_to "▶ Last playlist", current_user.trainings.last, class: "btn btn-primary rounded-3 fw-bold" %>
+    <div class="d-grid gap-2 my-3">
+<%= link_to "📅 Voir mes anciens trainings", history_trainings_path, class: "btn btn-outline-primary rounded-3 fw-bold" %>
+</div>
+
+  </div>
+
+  <% if @trainings.present? %>
+    <h4 class="mt-4">My sessions:</h4>
+
+    <% current_user.trainings.order(created_at: :desc).each do |training| %>
+      <div class="card mb-3 shadow-sm border-0 rounded-3 p-3">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <span class="text-danger fs-4 me-2">🏃</span>
+            <h6 class="mb-0"><%= training.name %></h6>
+          </div>
+          <span class="text-muted small"><%= training.created_at.strftime("%d %b %Y %H:%M") %></span>
+        </div>
+        <p class="text-muted small mb-0">Duration: <%= training.training_duration %> min</p>
+        <p class="text-muted small mb-0">Genre: <%= training.music_genre %></p>
+        <p class="text-muted small">Speed: <%= training.average_speed %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-center text-muted mt-3">Aucun training disponible.</p>
+  <% end %>
+</div>

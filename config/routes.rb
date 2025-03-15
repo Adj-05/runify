@@ -8,7 +8,19 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :trainings, only: [ :new, :create, :show]
+ # resources :trainings, only: [ :new, :create, :show]
+  #get "trainings/:id/preview", to: "trainings#preview", as: :preview_training
+  get 'trainings/history', to: 'trainings#history', as: :history_trainings
+  resources :trainings do
+    member do
+      get 'preview'
+      post 'confirm'
+    end
+  end
 
-
+  resources :trainings do
+    collection do
+      get :history
+    end
+  end
 end
