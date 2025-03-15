@@ -36,6 +36,6 @@ class TrainingsController < ApplicationController
   private
 
   def training_params
-    params.require(:training).permit(:average_speed, :training_duration, :music_genre)
+    params.require(:training).permit(:average_speed, :training_duration, :music_genre, :name)
   end
 end
