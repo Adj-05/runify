@@ -17,6 +17,5 @@ Rails.application.routes.draw do
       post 'confirm' #action pour confirmer la session
     end
   end
-
-
 end
+
