@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>Review Your Selections</h1>
+  <ul>
+    <li><strong>Average Pace:</strong> <%= @training.average_pace %></li>
+    <li><strong>Training Duration:</strong> <%= @training.training_duration %> minutes</li>
+    <li><strong>Music Genre:</strong> <%= @training.music_genre %></li>
+  </ul>
+
+  <div class="actions">
+    <%= button_to "Confirm", confirm_training_path(@training), method: :post, class: "btn btn-primary" %>
+    <%= link_to "Edit", edit_training_path(@training), class: "btn btn-secondary" %>
+  </div>
+</div>
