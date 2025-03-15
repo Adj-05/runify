@@ -26,8 +26,39 @@ class Training < ApplicationRecord
     end
   end
 
-  def generate_playlist
-
+  def bpm_min
+    case average_speed
+    when 'Slow'
+      return 100
+    when 'Medium'
+      return 121
+    when 'Fast'
+      return 141
+    end
   end
 
-end
+  def bpm_max
+    case average_speed
+    when 'Slow'
+      return 120
+    when 'Medium'
+      return 140
+    when 'Fast'
+      return 160
+    end
+  end
+  end
+
+  def generate_playlist
+    case average_speed
+    when 'slow'
+      bpm_min = 100
+      bpm_max = 120
+    when 'medium'
+      bpm_min = 121
+      bpm_max = 140
+    when 'fast'
+      bpm_min = 141
+      bpm_max = 160
+    end
+  end
