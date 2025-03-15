@@ -10,12 +10,17 @@ Rails.application.routes.draw do
   # root "posts#index"
  # resources :trainings, only: [ :new, :create, :show]
   #get "trainings/:id/preview", to: "trainings#preview", as: :preview_training
-
+  get 'trainings/history', to: 'trainings#history', as: :history_trainings
   resources :trainings do
     member do
-      get 'preview' #affiche page preview
-      post 'confirm' #action pour confirmer la session
+      get 'preview'
+      post 'confirm'
+    end
+  end
+
+  resources :trainings do
+    collection do
+      get :history
     end
   end
 end
-

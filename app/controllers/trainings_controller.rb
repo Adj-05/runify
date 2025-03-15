@@ -8,6 +8,10 @@ class TrainingsController < ApplicationController
     @trainings = current_user.trainings.order(created_at: :desc)
   end
 
+  def history
+    start_date = params.fetch(:start_date, Date.today).to_date
+    @trainings = current_user.trainings.where(created_at: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
+  end
 
 
 def show
@@ -69,5 +73,16 @@ end
 
   def training_params
     params.require(:training).permit(:average_speed, :training_duration, :music_genre, :name)
+  end
+
+
+  def set_default_start_time
+    self.start_time ||= Time.current # Définit la date actuelle si elle est vide
+  end
+
+
+  def set_training
+    @training = Training.find_by(id: params[:id])
+    redirect_to trainings_path, alert: "Training not found" if @training.nil?
   end
 end
