@@ -1,6 +1,6 @@
-<div class="container">
-  <h1>Transform your running sessions to an immersive experience</h1>
-  <%= simple_form_for @training do |f| %>
+<h1>Modify your choices</h1>
+
+ <%= simple_form_for @training do |f| %>
     <div class="vh-90">
       <%= f.label :average_speed, "What is your average pace?" %>
       <%= f.input :average_speed,
@@ -35,7 +35,5 @@
                   item_wrapper_class: 'category-item',
                   input_html: { class: 'category-selector' } %>
     </div>
-
-    <%= f.submit %>
-  <% end %>
-</div>
+  <%= f.submit "Save changes", class: "btn btn-primary" %>
+<% end %>
