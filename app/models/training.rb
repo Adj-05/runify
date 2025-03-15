@@ -11,9 +11,9 @@ class Training < ApplicationRecord
   validates :music_genre, presence: true, inclusion: { in: Music::MUSIC_GENRE }
   validates :name, presence: true
 
-  # before_validation :generate_training_name, only: [:create]
+  before_validation :generate_training_name, only: [:create]
 
-  # before_validation :generate_playlist
+  before_validation :generate_playlist
 
   def generate_training_name
     # Donne l'heure sous forme entier arrondi inferieur
@@ -24,6 +24,29 @@ class Training < ApplicationRecord
     else
       self.name = "Evening Run"
     end
+  end
+
+  def bpm_min
+    case average_speed
+    when 'Slow'
+      return 100
+    when 'Medium'
+      return 121
+    when 'Fast'
+      return 141
+    end
+  end
+
+  def bpm_max
+    case average_speed
+    when 'Slow'
+      return 120
+    when 'Medium'
+      return 140
+    when 'Fast'
+      return 160
+    end
+  end
   end
 
   def generate_playlist
@@ -38,23 +61,4 @@ class Training < ApplicationRecord
       bpm_min = 141
       bpm_max = 160
     end
-
-    results = RSpotify::Recommendations.generate(
-      min_tempo: bpm_min,
-      max_tempo: bpm_max,
-      seed_genres: [music_genre]
-    )
-
-    tracks = []
-    total_duration = 0
-
-    debugger
-
-    results.tracks.each do |track|
-      break if total_duration >= training_duration
-
-      tracks << track.uri
-      total_duration += track.duration_ms / 1000 # Convertit en secondes
-    end
   end
-end
