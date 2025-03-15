@@ -8,7 +8,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  resources :trainings, only: [ :new, :create, :show]
+ # resources :trainings, only: [ :new, :create, :show]
+  #get "trainings/:id/preview", to: "trainings#preview", as: :preview_training
+
+  resources :trainings do
+    member do
+      get 'preview' #affiche page preview
+      post 'confirm' #action pour confirmer la session
+    end
+  end
 
 
 end
