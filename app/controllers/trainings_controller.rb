@@ -4,6 +4,12 @@ class TrainingsController < ApplicationController
     @training = Training.new
   end
 
+  def index
+    @trainings = current_user.trainings.order(created_at: :desc)
+  end
+
+
+
 def show
   @training = Training.find(params[:id])
 end
@@ -39,7 +45,6 @@ end
         dur_max: @training.training_duration
       )
     redirect_to playlists_path, notice: "Your playlist is ready, enjoy your session!"
-    p "//////////////////////////////////////////////////////////////////////////////// #{@training.bpm_min} #{@training.bpm_max}"
     rescue StandardError => e
       Rails.logger.error "Error while creating your playlist : #{e.message}"
       flash[:alert] = "Your playlist couldn't be created but your training has been saved"
