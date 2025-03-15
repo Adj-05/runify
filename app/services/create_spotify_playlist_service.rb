@@ -5,7 +5,7 @@ class CreateSpotifyPlaylistService < ApplicationService
 
   attr_reader :name, :track_ids, :description
 
-  def initialize(user, name, tracks_infos, description: 'Created by Spotify Playlist Generator')
+  def initialize(user, name, tracks_infos, description: 'Created by Runify')
     @user = user
     @name = name
     @tracks_infos = tracks_infos
@@ -35,15 +35,16 @@ class CreateSpotifyPlaylistService < ApplicationService
   def create_playlist
     url = "#{BASE_URL}/users/#{@user_spotify_id}/playlists"
     body = { name:, description:, public: true }
-
     request_with_auth(:post, url, body:)
+
   end
 
   def add_tracks_to_playlist(playlist_id)
     url = "#{BASE_URL}/playlists/#{playlist_id}/tracks"
     body = { uris: @tracks_spotify_uris }
 
-    request_with_auth(:post, url, body:)
+   test =  request_with_auth(:post, url, body:)
+   return test
   end
 
   def get_playlist(playlist_id)
