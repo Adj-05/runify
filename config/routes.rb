@@ -13,8 +13,9 @@ Rails.application.routes.draw do
   get 'trainings/history', to: 'trainings#history', as: :history_trainings
   resources :trainings do
     member do
-      get 'preview'
-      post 'confirm'
+      get 'preview' #affiche page preview
+
+      post 'confirm' #action pour confirmer la session
     end
   end
 
@@ -23,4 +24,5 @@ Rails.application.routes.draw do
       get :history
     end
   end
+
 end

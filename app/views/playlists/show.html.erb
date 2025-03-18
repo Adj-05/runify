@@ -1,2 +1,13 @@
-<h1>Playlists#show</h1>
-<p>Find me in app/views/playlists/show.html.erb</p>
+
+<h1>Enjoy your session!</h1>
+
+<% if @playlist.spotify_id%>
+<iframe
+  src="https://open.spotify.com/embed/playlist/<%=@playlist.spotify_id%>"
+  width="100%"
+  height="380"
+  frameborder="0"
+  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+</iframe>
+<% end %>
+</div>
