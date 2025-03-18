@@ -1,7 +1,33 @@
-body{
-  background: white;
+
+.home, body{
+  background: rgb(6, 6, 6);
+  align-items: center;
 }
 
 h1{
   color:white;
+
+}
+
+
+p{
+  color:rgb(255, 254, 254);
+  font-family: Georgia, serif;
+  background-color: rgb(23, 22, 22);
+  width : 300px;
+  height: 200px;
+  border-radius: 11px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 40px;
+  margin-left: 10%;
+  text-align: center;
+  font-size: 25px;
+}
+
+.login-button{
+  background-color: greenyellow;
+  width: 200px;
+  border-radius: 20%;
 }

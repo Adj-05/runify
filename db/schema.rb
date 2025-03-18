@@ -54,8 +54,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_15_150700) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "favorite_playlist"
-    t.integer "bpm_min"
-    t.integer "bpm_max"
     t.boolean "confirmed"
     t.datetime "start_time"
     t.index ["user_id"], name: "index_trainings_on_user_id"
