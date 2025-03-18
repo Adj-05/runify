@@ -7,7 +7,9 @@
       </a>
       <div class="d-flex flex-column ms-2">
         <span class="text-grey fw-bold fs-6 grey">Welcome Back</span>
-        <span class="fw-bold fs-5 username"><%= current_user.spotify_name %></span>
+<% if current_user %>
+  <span class="fw-bold fs-5 username"><%= current_user.spotify_name %></span>
+<% end %>
       </div>
     </div>
 
