@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   resources :trainings do
     member do
       get 'preview' #affiche page preview
+
       post 'confirm' #action pour confirmer la session
     end
   end
 end
-

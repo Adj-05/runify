@@ -18,6 +18,11 @@ class PlaylistsController < ApplicationController
     end
   end
 
+  def show
+    @playlist = Playlist.find(params[:id])
+  end
+
+
   private
 
   def find_tracks(tempo,genre, duration)
@@ -59,9 +64,6 @@ class PlaylistsController < ApplicationController
     playlist
   end
 
-  def show
-    @Playlist.all
-  end
 
   def destroy
   end
