@@ -10,6 +10,10 @@
 
   <div class="d-grid gap-2 my-3">
     <%= link_to "▶ Last playlist", current_user.trainings.last, class: "btn btn-primary rounded-3 fw-bold" %>
+    <div class="d-grid gap-2 my-3">
+<%= link_to "📅 Voir mes anciens trainings", history_trainings_path, class: "btn btn-outline-primary rounded-3 fw-bold" %>
+</div>
+
   </div>
 
   <% if @trainings.present? %>
