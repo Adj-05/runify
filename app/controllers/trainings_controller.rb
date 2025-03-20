@@ -24,15 +24,9 @@ def create
   @training.user_id = current_user.id
 
   if @training.save
-    respond_to do |format|
-      format.html { redirect_to preview_training_path(@training), notice: "Confirm or edit your choices." }
-      format.json { render json: { id: @training.id }, status: :created }
-    end
+    redirect_to preview_training_path(@training), notice: "Confirm or edit your choices."
   else
-    respond_to do |format|
-      format.html { render :new, status: :unprocessable_entity }
-      format.json { render json: { errors: @training.errors.full_messages }, status: :unprocessable_entity }
-    end
+    render :new, status: :unprocessable_entity
   end
 end
 

@@ -1,51 +1,48 @@
 <div data-controller="swipe" class="mt-5">
-  <div class="container">
-    <h1>Transform your running sessions to an immersive experience</h1>
-    <%= simple_form_for @training, data: {swipe_target: "form"} do |f| %>
 
-      <div data-swipe-target="averageSpeed" class="vh-90">
-        <%= f.label :average_speed, "What is your average pace?" %>
-        <%= f.input :average_speed,
-                    legend_tag: false,
-                    as: :radio_buttons,
-                    collection: ['Slow', 'Medium', 'Fast'],
-                    label: false,
-                    collection_wrapper_class: 'category-wrapper',
-                    item_wrapper_class: 'category-item',
-                    input_html: { class: 'category-selector', data: { swipe_target: "input1", action: "click->swipe#swipe1" } }
-        %>
-      </div>
+<div class="container">
+  <h1>Transform your running sessions to an immersive experience</h1>
+  <%= simple_form_for @training, data: {swipe_target: "form"} do |f| %>
+    <div data-swipe-target="averageSpeed" class="vh-90">
+      <%= f.label :average_speed, "What is your average pace?" %>
+      <%= f.input :average_speed,
+                  legend_tag: false,
+                  as: :radio_buttons,
+                  collection: ['Slow', 'Medium','Fast'],
+                  label: false,
+                  collection_wrapper_class: 'category-wrapper',
+                  item_wrapper_class: 'category-item',
+                  input_html: { class: 'category-selector', data: { swipe_target: "input1", action: "click->swipe#swipe1" }  }
 
-      <div data-swipe-target="trainingDuration" class="vh-90 d-none">
-        <%= f.label :training_duration, "How long do you want to run?" %>
-        <%= f.input :training_duration,
-                    legend_tag: false,
-                    as: :radio_buttons,
-                    collection: Training::TRAINING_DURATION,
-                    label: false,
-                    collection_wrapper_class: 'category-wrapper',
-                    item_wrapper_class: 'category-item',
-                    input_html: { class: 'category-selector', data: { action: "click->swipe#swipe2" } }
-        %>
-      </div>
+      %>
+    </div>
 
-        <div data-swipe-target="musicGenre" class="vh-90 d-none">
-  <%= f.label :music_genre, "Select the type of music you'd like for your session" %>
-  <%= f.input :music_genre,
-              legend_tag: false,
-              as: :radio_buttons,
-              collection: ['pop', 'reggae', 'rock', 'rap'],
-              collection_wrapper_class: 'category-wrapper',
-              item_wrapper_class: 'category-item',
-              input_html: { class: 'category-selector', data: { action: "click->swipe#sendForm" } } %>
+    <div data-swipe-target="trainingDuration" class="vh-90 d-none">
+      <%= f.label :training_duration,"How long do you want to run?" %>
+      <%= f.input :training_duration,
+                  legend_tag: false,
+                  as: :radio_buttons,
+                  collection: Training::TRAINING_DURATION,
+                  label: false,
+                  collection_wrapper_class: 'category-wrapper',
+                  item_wrapper_class: 'category-item',
+                  input_html: { class: 'category-selector',data: { action: "click->swipe#swipe2" } } %>
+    </div>
+
+    <div data-swipe-target="musicGenre" class="vh-90 d-none">
+      <%= f.label :music_genre, "Select the type of music you'd like for your session" %>
+      <%= f.input :music_genre,
+                  legend_tag: false,
+                  as: :radio_buttons,
+                  collection: ['pop', 'reggae', 'rock', 'rap'],
+                  collection_wrapper_class: 'category-wrapper',
+                  item_wrapper_class: 'category-item',
+                  input_html: { class: 'category-selector', data: { action: "click->swipe#sendForm" } } %>
+    </div>
+
+    <i data-swipe-target="button1" data-action="click->swipe#back1" class="fa-solid fa-arrow-left d-none"></i>
+    <i data-swipe-target="button2" data-action="click->swipe#back2" class="fa-solid fa-arrow-left d-none"></i>
+
+  <% end %>
 </div>
-
-      </div>
-
-      <i data-swipe-target="button1" data-action="click->swipe#back1" class="fa-solid fa-arrow-left d-none"></i>
-      <i data-swipe-target="button2" data-action="click->swipe#back2" class="fa-solid fa-arrow-left d-none"></i>
-      <i data-action="click->swipe#redirectToPreview" class="fa-solid fa-arrow-right"></i> <!-- ✅ Ajouté ici -->
-
-    <% end %>
-  </div>
 </div>
