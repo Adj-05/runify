@@ -14,16 +14,16 @@
   <div class="table-responsive d-none d-md-block">
     <table class="table table-bordered text-center">
       <thead class="bg-light">
-      <tr>
+        <tr>
           <% (start_date.beginning_of_month..start_date.end_of_month).to_a.slice(0, 7).each do |day| %>
             <th class="p-2"><%= t('date.abbr_day_names')[day.wday] %></th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
         <% (start_date.beginning_of_month..start_date.end_of_month).to_a.each_slice(7) do |week| %>
-        <tr>
-          <% week.each do |day| %>
+          <tr>
+            <% week.each do |day| %>
               <td class="p-3 border rounded-3 <%= calendar.td_classes_for(day) %>" style="min-width: 50px;">
                 <div class="fw-bold"><%= day.day %></div>
                 <% events = sorted_events.fetch(day, []) %>
@@ -31,16 +31,16 @@
                   <% events.each do |event| %>
                     <div class="badge bg-primary w-100 mt-2"><%= event.name %></div>
                   <% end %>
-              <% else %>
+                <% else %>
                   <div class="text-muted small mt-2">Aucun training</div>
-              <% end %>
+                <% end %>
               </td>
-          <% end %>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
   <!-- Version mobile -->
   <div class="d-md-none">

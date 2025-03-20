@@ -13,7 +13,6 @@ class TrainingsController < ApplicationController
     @trainings = current_user.trainings.where(created_at: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
   end
 
-
 def show
   @training = Training.find(params[:id])
 end
@@ -93,8 +92,9 @@ end
   private
 
   def training_params
-    params.require(:training).permit(:average_speed, :training_duration, :music_genre, :name)
+    params.require(:training).permit(:average_speed, :training_duration, :music_genre, :name, :date)
   end
+
 
 
   def set_default_start_time

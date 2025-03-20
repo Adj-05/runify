@@ -1,6 +1,6 @@
 <div class="container mt-4">
-<div class="card text-center shadow-lg p-4 border-0 rounded-4">
-  <h5 class="mt-2 fw-bold">Calendrier</h5>
+  <div class="card text-center shadow-lg p-4 border-0 rounded-4">
+    <h5 class="mt-2 fw-bold">Calendrier</h5>
     <div class="position-relative d-flex justify-content-center my-3">
       <div class="progress-circle border border-3 border-primary-subtle rounded-circle d-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
         <h4 class="fw-bold"><%= start_date.strftime('%B %Y') %></h4>
@@ -13,29 +13,29 @@
     <%= link_to "➡", calendar.url_for_next_view, class: "btn btn-outline-primary rounded-3 fw-bold" %>
   </div>
 
-<div class="table-responsive">
-  <table class="table table-bordered text-center">
-    <thead class="bg-light">
-      <tr>
-        <% date_range.slice(0, 7).each do |day| %>
-          <th class="p-2"><%= t('date.abbr_day_names')[day.wday] %></th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
-      <% date_range.each_slice(7) do |week| %>
+  <div class="table-responsive">
+    <table class="table table-bordered text-center">
+      <thead class="bg-light">
         <tr>
-          <% week.each do |day| %>
-            <td class="p-3 border rounded-3 <%= calendar.td_classes_for(day) %>" style="min-width: 50px;">
+          <% date_range.slice(0, 7).each do |day| %>
+            <th class="p-2"><%= t('date.abbr_day_names')[day.wday] %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% date_range.each_slice(7) do |week| %>
+          <tr>
+            <% week.each do |day| %>
+              <td class="p-3 border rounded-3 <%= calendar.td_classes_for(day) %>" style="min-width: 50px;">
                 <div class="fw-bold"><%= day.day %></div>
                 <% if sorted_events.fetch(day, []).any? %>
-              <span class="badge bg-primary">📅 Événement</span>
-              <% end %>
-</td>
+                  <span class="badge bg-primary">📅 Événement</span>
+                <% end %>
+              </td>
             <% end %>
           </tr>
-      <% end %>
-    </tbody>
-</table>
-    </div>
+        <% end %>
+      </tbody>
+    </table>
   </div>
+</div>
