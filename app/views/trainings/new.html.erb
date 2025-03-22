@@ -1,13 +1,9 @@
 <div data-controller="swipe" data-user-id="<%= current_user.id %>" class="screen-container">
   <div class="container">
-
     <!-- Barre de progression -->
     <div data-swipe-target="progressBar" class="progress-bar">1 / 3</div>
-
     <h1 class="title">Transform your running sessions into an immersive experience</h1>
-
    <%= simple_form_for @training, data: { swipe_target: "form" }, html: { class: "form" } do |f| %>
-
       <!-- Écran 1 : Sélection de la vitesse -->
       <div data-swipe-target="averageSpeed" class="screen active">
         <h2 class="question">What is your average pace?</h2>
@@ -20,7 +16,6 @@
           <% end %>
         </div>
       </div>
-
       <!-- Écran 2 : Durée d'entraînement -->
       <div data-swipe-target="trainingDuration" class="screen">
         <h2 class="question">How long do you want to run?</h2>
@@ -33,7 +28,6 @@
           <% end %>
         </div>
       </div>
-
       <!-- Écran 3 : Genre musical -->
       <div data-swipe-target="musicGenre" class="screen">
         <h2 class="question">Select the type of music you'd like to listen during your session</h2>
@@ -46,13 +40,15 @@
           <% end %>
         </div>
       </div>
-
       <!-- Boutons de navigation -->
       <i data-swipe-target="button1" data-action="click->swipe#back1" class="fa-solid fa-arrow-left d-none"></i>
       <i data-swipe-target="button2" data-action="click->swipe#back2" class="fa-solid fa-arrow-left d-none"></i>
       <i data-action="click->swipe#redirectToPreview" class="fa-solid fa-arrow-right"></i>
-
     <% end %>
-
   </div>
 </div>
+
+
+
+
+NOUVEAU
