@@ -20,7 +20,9 @@
   font-size: 20px;
   transition: color 0.3s;
 }
-
+.white-text {
+  color: white !important;
+}
 .nav-item.active {
   color: #64dd17;
   font-size: 24px;
@@ -117,6 +119,24 @@
   color: white;
 }
 
+// .green-button {
+//     background-color: #DFFF00; /* Couleur fluo */
+//     color: black; /* Texte noir */
+//     padding: 15px 30px;
+//     font-size: 18px;
+//     border: none;
+//     border-radius: 30px; /* Bords arrondis */
+//     cursor: pointer;
+//     font-weight: bold;
+//     text-align: center;
+//     display: inline-block;
+//     width: 200px;
+//   }
+
+  .button:hover {
+    background-color: #c7e600; /* Légèrement plus foncé au survol */
+  }
+
 
 
 body {
@@ -133,11 +153,21 @@ body {
   box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1); /* Ombre légère */
 }
 
+.card-2 {
+  background-color: #fff;
+  color: #000 !important;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1)
+}
+
+
+
+
 .container, .text-muted {
   color: #fff !important; /* Texte blanc sur le fond noir */
 }
 
-p, h4, h5, h6 {
+p, h5, h6 {
   color: #000 !important; /* Texte noir dans les cartes */
 }
 
@@ -157,15 +187,16 @@ p, h4, h5, h6 {
 
 // Submit button (styled like other options)
 .btn.btn-primary {
-  width: 100%;
-  max-width: 320px;
+  width: 100%; /* Prend toute la largeur */
   font-size: 1rem;
   padding: 0.75rem;
   border-radius: 12px;
-  background-color: #e63946;
+  background-color: #DFFF00;
   border: none;
   margin-top: 1rem;
+  color: black
 }
+
 
 .text-muted {
   color: #6c757d !important;

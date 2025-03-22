@@ -1,15 +1,16 @@
 <div class="container mt-4">
+<div class="card-2">
   <h5 class="mt-2 fw-bold text-light text-center"><%= current_user.spotify_name %></h5>
 
-  <div class="position-relative d-flex justify-content-center my-3">
+  <div class=" position-relative d-flex justify-content-center my-3">
     <div class="progress-circle border border-3 border-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
       <h4 class="fw-bold text-danger"><%= current_user.trainings.count %>🔥</h4>
     </div>
   </div>
-
+</div>
   <div class="d-grid gap-2 my-3">
-    <%= link_to "▶ Last playlist", current_user.trainings.last, class: "btn btn-danger rounded-3 fw-bold" %>
-    <%= link_to "📅 Voir mes anciens trainings", history_trainings_path, class: "btn btn-outline-light rounded-3 fw-bold" %>
+    <%= link_to "▶ Last playlist", current_user.trainings.last, class: "btn btn-primary rounded-3 fw-bold green-button" %>
+    <%= link_to "📅 My lasts trainings", history_trainings_path, class: "btn btn-outline-light rounded-3 fw-bold" %>
   </div>
 
   <% if @trainings.present? %>
@@ -41,6 +42,6 @@
       <% end %>
     </div>
   <% else %>
-    <p class="text-center text-muted mt-3">Aucun training disponible.</p>
+    <p class="text-center text-muted mt-3">No training Available.</p>
   <% end %>
 </div>
