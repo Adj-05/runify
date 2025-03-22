@@ -1,4 +1,4 @@
-import { Controller } from "@hotwired/stimulus"
+/*  import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="swipe"
 export default class extends Controller {
@@ -35,9 +35,107 @@ export default class extends Controller {
     this.button2Target.classList.add("d-none");
     this.button1Target.classList.remove("d-none");
   }
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  import { Controller } from "@hotwired/stimulus";
+
+export default class extends Controller {
+  static targets = ["averageSpeed", "trainingDuration", "musicGenre", "button1", "button2", "progressBar", "form"];
+
+  connect() {
+    this.screens = [this.averageSpeedTarget, this.trainingDurationTarget, this.musicGenreTarget];
+    this.currentScreenIndex = 0;
+    this.userId = this.element.dataset.userId;
+    this.updateScreens();
+    console.log("Stimulus controller connected");
+  }
+
+  swipe1(event) {
+    this.updateSelection(event);
+    setTimeout(() => this.nextScreen(), 200);
+  }
+
+  swipe2(event) {
+    this.updateSelection(event);
+    setTimeout(() => this.nextScreen(), 200);
+  }
 
   sendForm(event) {
-    event.preventDefault(); // Empêche toute action par défaut du formulaire
+    event.preventDefault();
+    this.updateSelection(event);
+    setTimeout(() => this.redirectToPreview(), 200);
+  }
+
+  back1() {
+    this.previousScreen();
+  }
+
+  back2() {
+    this.previousScreen();
+  }
+
+  nextScreen() {
+    if (this.currentScreenIndex < this.screens.length - 1) {
+      this.currentScreenIndex++;
+      this.updateScreens();
+    }
+  }
+
+  previousScreen() {
+    if (this.currentScreenIndex > 0) {
+      this.currentScreenIndex--;
+      this.updateScreens();
+    }
+  }
+
+  updateScreens() {
+    this.screens.forEach((screen, index) => {
+      screen.style.display = index === this.currentScreenIndex ? "flex" : "none";
+    });
+
+    this.progressBarTarget.innerText = `${this.currentScreenIndex + 1} / ${this.screens.length}`;
+
+    this.button1Target.style.display = this.currentScreenIndex > 0 ? "block" : "none";
+    this.button2Target.style.display = this.currentScreenIndex > 1 ? "block" : "none";
+  }
+
+  updateSelection(event) {
+    const selectedInput = event.target;
+    const allInputs = selectedInput.closest(".options").querySelectorAll("input");
+
+    allInputs.forEach(input => {
+      const label = input.nextElementSibling;
+      if (label) {
+        label.style.background = "#1E1E1E";
+        label.style.color = "white";
+      }
+    });
+
+    const selectedLabel = selectedInput.nextElementSibling;
+    if (selectedLabel) {
+      selectedLabel.style.background = "#64dd17";
+      selectedLabel.style.color = "white";
+    }
+  }
+
+  sendForm(event) {
+    event.preventDefault();
 
     fetch(this.formTarget.action, {
       method: "POST",
@@ -50,7 +148,7 @@ export default class extends Controller {
     })
     .then(data => {
       if (data.id) {
-        window.location.href = `/trainings/${data.id}/preview`; // ✅ Redirection vers training/:id/preview
+        window.location.href = `/trainings/${data.id}/preview`;
       } else {
         console.error("L'ID du training est manquant dans la réponse.");
       }
@@ -58,9 +156,5 @@ export default class extends Controller {
     .catch(error => {
       console.error(error);
     });
-  }
-
-  connect() {
-    console.log("Stimulus controller connected");
   }
 }
