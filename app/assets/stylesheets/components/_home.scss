@@ -27,7 +27,7 @@
 
 
 #paragraphe_accueil {
-  color: rgb(255, 254, 254);
+  color: rgb(255, 254, 254) !important;
   font-family: Georgia, serif;
   background-color: rgb(23, 22, 22);
   width: 80%;
@@ -61,6 +61,7 @@
   margin-bottom: 40px;
   font-size: 1rem;
   border: none;
+  text-decoration: none;
   cursor: pointer;
 }
 
@@ -95,12 +96,12 @@
     margin-left: 0;
   }
 
-  paragraphe_accueil {
+ /*  paragraphe_accueil {
     font-size: 1.3rem;
     padding: 20px;
     width: 90%;
     margin-bottom: 50px;
-  }
+  } */
 
   .login-button {
     width: 80%;

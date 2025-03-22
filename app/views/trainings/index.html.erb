@@ -11,9 +11,12 @@
 </div>
 
   <div class="d-grid gap-2 my-3">
-    <%= link_to "▶ Last playlist", current_user.trainings.last, class: "btn btn-primary rounded-3 fw-bold green-button" %>
-    <%= link_to "📅 My lasts trainings", history_trainings_path, class: "btn btn-outline-light rounded-3 fw-bold" %>
-  </div>
+    <%= link_to "🎧 Last playlist", current_user.trainings.last, class: "btn btn-primary rounded-3 fw-bold green-button" %>
+  <%= link_to raw('<span style="color: #3fb950;">🗓️</span> See my previous trainings'), history_trainings_path,
+    class: "fw-bold px-4 py-2 rounded-4 border border-2 text-decoration-none",
+    style: "border-color: #3FB950; color: #3FB950; background-color: transparent; font-size: 1rem; width: 85%; text-align: center;" %>
+</div>
+
 
   <% if @trainings.present? %>
     <h2 class="text-center my-4 text-light">🏋️‍♂️ My sessions</h2>
