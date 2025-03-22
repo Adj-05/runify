@@ -1,6 +1,9 @@
 class Training < ApplicationRecord
   belongs_to :user
   has_many :playlists, dependent: :destroy
+  default_scope -> { order(:created_at) }
+  before_save :set_default_date
+
   # validates :start_time, presence: true
 
   AVERAGE_SPEED = ["Slow : 7.1 to 8.3 mins/KM", "Medium : 5.3 to 6.5 mins/KM", "Fast : 4 to 5.1 mins/KM"]

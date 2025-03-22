@@ -1,8 +1,7 @@
 <div class="container mt-4">
   <div class="card text-center shadow-lg p-4 border-0 rounded-4">
     <div class="position-relative d-flex justify-content-center my-3">
-        <h4 class="fw-bold"><%= start_date.strftime('%B %Y') %></h4>
-      </div>
+      <h4 class="fw-bold"><%= start_date.strftime('%B %Y') %></h4>
     </div>
   </div>
 
@@ -15,21 +14,21 @@
     <table class="table table-bordered text-center">
       <thead class="bg-light">
         <tr>
-          <% (start_date.beginning_of_month..start_date.end_of_month).to_a.slice(0, 7).each do |day| %>
+          <% (start_date.beginning_of_week(:monday)..start_date.end_of_week(:sunday)).to_a.each do |day| %>
             <th class="p-2"><%= t('date.abbr_day_names')[day.wday] %></th>
           <% end %>
         </tr>
       </thead>
       <tbody>
-        <% (start_date.beginning_of_month..start_date.end_of_month).to_a.each_slice(7) do |week| %>
+        <% (start_date.beginning_of_month.beginning_of_week(:monday)..start_date.end_of_month.end_of_week(:sunday)).to_a.each_slice(7) do |week| %>
           <tr>
             <% week.each do |day| %>
               <td class="p-3 border rounded-3 <%= calendar.td_classes_for(day) %>" style="min-width: 50px;">
-                <div class="fw-bold"><%= day.day %></div>
-                <% events = sorted_events.fetch(day, []) %>
-                <% if events.any? %>
-                  <% events.each do |event| %>
-                    <div class="badge bg-primary w-100 mt-2"><%= event.name %></div>
+                <div class="fw-bold <%= 'text-muted' if day.month != start_date.month %>"><%= day.day %></div>
+                <% trainings = @trainings.select { |t| t.date == day } %>
+                <% if trainings.any? %>
+                  <% trainings.each do |training| %>
+                    <div class="badge bg-primary w-100 mt-2"><%= training.name %></div>
                   <% end %>
                 <% else %>
                   <div class="text-muted small mt-2">No training</div>
@@ -48,11 +47,11 @@
       <div class="d-flex flex-wrap justify-content-between mb-2">
         <% week.each do |day| %>
           <div class="card text-center shadow-sm p-2 border-0 rounded-3 m-1" style="width: 45%; min-width: 100px;">
-            <div class="fw-bold"><%= day.day %></div>
-            <% events = sorted_events.fetch(day, []) %>
-            <% if events.any? %>
-              <% events.each do |event| %>
-                <div class="badge bg-primary w-100 mt-2"><%= event.name %></div>
+            <div class="fw-bold <%= 'text-muted' if day.month != start_date.month %>"><%= day.day %></div>
+            <% trainings = @trainings.select { |t| t.date == day } %>
+            <% if trainings.any? %>
+              <% trainings.each do |training| %>
+                <div class="badge bg-primary w-100 mt-2"><%= training.name %></div>
               <% end %>
             <% else %>
               <div class="text-muted small mt-2">No training</div>
