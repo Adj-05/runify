@@ -5,7 +5,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  flex-direction: column;  /* Centrer verticalement */
+  flex-direction: column;
 }
 
 .home {
@@ -14,15 +14,15 @@ body {
   align-items: center;
   text-align: center;
   justify-content: center;
-  width: 100%; /* Permet au .home de s'adapter à la largeur de l'écran */
-  padding: 0px; /* Ajoute un peu d'espace autour du contenu */
+  width: 100%;
+  padding: 0px;
 }
 
 h1 {
   color: white;
-  font-size: 2.2rem; /* Augmenter la taille du titre pour plus de visibilité */
-  margin-bottom: 50px;  /* Ajoute un grand espace sous le titre */
-  margin-top: 5;  /* Pas de marge supérieure */
+  font-size: 2.2rem;
+  margin-bottom: 50px;
+  margin-top: 5;
 }
 
 p {
@@ -39,25 +39,25 @@ p {
   padding: 20px;
   text-align: center;
   font-size: 1.2rem;
-  margin: 0 auto; /* Centre horizontalement */
-  margin-bottom: 60px; /* Espace important sous le texte */
+  margin: 0 auto;
+  margin-bottom: 60px;
 }
 
 .runner-image {
-  width: 100%;  /* Prend toute la largeur de l'écran */
+  width: 100%;
   height: auto;
-  margin-bottom: 60px; /* Espace sous l'image pour séparer le bouton */
+  margin-bottom: 60px;
   border: solid rgb(116, 117, 115) 1px
 }
 
 .login-button {
   background-color: greenyellow;
-  width: 70%;  /* Augmenter la largeur du bouton pour plus de visibilité */
+  width: 70%;
   max-width: 350px;
   height: 50px;
   border-radius: 10px;
-  margin-top: 30px;  /* Ajouter un peu d'espace au-dessus du bouton */
-  margin-bottom: 40px; /* Plus d'espace sous le bouton */
+  margin-top: 30px;
+  margin-bottom: 40px;
   font-size: 1rem;
   border: none;
   cursor: pointer;
@@ -65,32 +65,32 @@ p {
 
 @media (max-width: 768px) {
   h1 {
-    font-size: 2rem; /* Ajuster la taille du titre pour les tablettes */
-    margin-bottom: 5px;  /* Moins d'espace sous le titre */
+    font-size: 2rem;
+    margin-bottom: 5px;
   }
 
   p {
     font-size: 1.3rem;
     width: 90%;
-    margin-bottom: 50px; /* Plus d'espace sous le texte pour les écrans moyens */
+    margin-bottom: 50px;
   }
 
   .login-button {
-    width: 70%;  /* Bouton plus large pour les écrans moyens */
-    margin-bottom: 30px; /* Plus d'espace sous le bouton */
+    width: 70%;
+    margin-bottom: 30px;
   }
 
   .runner-image {
-    max-width: 100%; /* Gérer la taille de l'image */
-    margin-bottom: 20px; /* Plus d'espace sous l'image */
+    max-width: 100%;
+    margin-bottom: 20px;
   }
 }
 
 @media (max-width: 400px) {
   h1 {
     margin-top: 0;
-    font-size: 1.8rem; /* Taille réduite pour les petits écrans */
-    margin-bottom: 5px; /* Plus d'espace sous le titre */
+    font-size: 1.8rem;
+    margin-bottom: 5px;
     margin-left: 0;
   }
 
@@ -98,16 +98,16 @@ p {
     font-size: 1.3rem;
     padding: 20px;
     width: 90%;
-    margin-bottom: 50px; /* Augmenter l'espace sous le texte */
+    margin-bottom: 50px;
   }
 
   .login-button {
-    width: 80%;  /* Le bouton occupe plus d'espace sur les petits écrans */
-    margin-bottom: 30px; /* Plus d'espace sous le bouton */
+    width: 80%;
+    margin-bottom: 30px;
   }
 
   .runner-image {
-    width: 100%;  /* L'image occupe toute la largeur de l'écran */
-    margin-bottom: 20px; /* Plus d'espace sous l'image */
+    width: 100%;
+    margin-bottom: 20px;
   }
 }

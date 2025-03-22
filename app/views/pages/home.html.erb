@@ -2,7 +2,9 @@
   <div class="contenu-home">
     <h1>Runify</h1>
     <%= image_tag "runner.png", class: "runner-image" %>
-    <button class="login-button">Get started with Spotify</button>
+    <%= link_to trainings_path, class: "login-button" do %>
+      <button class="login-button">Get started with Spotify</button>
+    <% end %>
     <div class="titre">
       <p>Transform each run into an immersive experience</p>
       <div class="p-wave"></div>
