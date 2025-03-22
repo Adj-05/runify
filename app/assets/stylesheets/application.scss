@@ -13,26 +13,7 @@
 @import "simple_calendar";
 @import "components/simple_calendar";
 
-
-
-
-/* .bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgb(40, 39, 39);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  padding: 20px 20px;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-
-  // margin-bottom: 20px;
-
-} */
+// Navigation
 .nav-item {
   text-decoration: none;
   color: #888;
@@ -49,82 +30,119 @@
   display: block;
 }
 
+// Layout & Typography (Mobile Friendly)
 .screen-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start;
+  padding: 2rem 1rem;
   background: #121212;
+  min-height: 100vh;
   color: white;
   font-family: 'Poppins', sans-serif;
 }
 
 .container {
-  width: 90%;
-  max-width: 400px;
+  width: 100%;
+  max-width: 500px;
   text-align: center;
 }
 
 .title {
-  font-size: 24px;
+  font-size: 1.8rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 
 .question {
-  font-size: 20px;
-  margin-bottom: 15px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
 }
 
+// Form layout
 .screen {
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 400px;
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  width: 100%;
+  margin-bottom: 2rem;
 }
 
-.screen.active {
-  display: flex;
-  opacity: 1;
-  transform: translateY(0);
-}
-
+// Options layout (responsive + centered)
 .options {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 2rem;
   width: 100%;
 }
 
 .option-item {
   width: 100%;
+  max-width: 320px;
 }
 
-/* Personnalisation des boutons radio */
-.option-item input[type="radio"] {
-  display: none; /* Masquer les boutons radio natifs */
-}
-
-.option-item label {
+// Styled labels as buttons
+.choice-label {
   display: block;
-  background: #1E1E1E;
-  padding: 15px;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: #1e1e1e;
+  color: white;
+  border: 2px solid #ccc;
   border-radius: 12px;
-  transition: background 0.3s ease-in-out;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
   text-align: center;
-  font-size: 18px;
+}
+
+.choice-label:hover {
+  border-color: #aaa;
+  background-color: #2a2a2a;
+}
+
+// Hide native radio
+.choice-radio {
+  display: none;
+}
+
+// Active selection in red
+.choice-radio:checked + .choice-label {
+  border-color: #e63946;
+  background-color: #e63946;
   color: white;
 }
 
-/* Appliquer uniquement le vert lorsque sélectionné */
-.option-item input[type="radio"]:checked + label {
-  background: #64dd17; /* Vert */
-  color: white;
+// Submit button (styled like other options)
+.btn.btn-primary {
+  width: 100%;
+  max-width: 320px;
+  font-size: 1rem;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background-color: #e63946;
+  border: none;
+  margin-top: 1rem;
 }
 
+.btn.btn-primary:hover {
+  background-color: darken(#e63946, 5%);
+}
+
+// Progress bar
+.progress-bar {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #64dd17;
+}
+
+// Back button (if reused)
 .back-button {
   position: absolute;
   top: 20px;
@@ -134,38 +152,36 @@
   display: none;
 }
 
-/* Barre de progression */
-.progress-bar {
-  text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #64dd17;
+// Responsive buttons for mobile
+@media (max-width: 576px) {
+  .btn {
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .btn-lg {
+    width: 100%;
+  }
 }
 
-/* Options de sélection */
-.option-item {
+// Custom action buttons (Edit / Confirm)
+.action-btn {
   width: 100%;
-}
-
-.option-item input[type="radio"] {
-  display: none; /* Masquer les boutons radio natifs */
-}
-
-.option-item label {
-  display: block;
-  background: #1E1E1E;
-  padding: 15px;
-  border-radius: 12px;
-  transition: background 0.3s ease-in-out;
-  cursor: pointer;
+  max-width: 280px;
   text-align: center;
-  font-size: 18px;
-  color: white;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border-radius: 12px;
+  transition: transform 0.1s ease-in-out, box-shadow 0.2s ease;
 }
 
-/* Appliquer uniquement le vert lorsqu'un choix est sélectionné */
-.option-item input[type="radio"]:checked + label {
-  background: #64dd17; /* Vert */
-  color: white;
+.action-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 576px) {
+  .action-btn {
+    width: 220px;
+  }
 }

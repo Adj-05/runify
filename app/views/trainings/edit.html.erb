@@ -1,39 +1,52 @@
-<h1>Modify your choices</h1>
+<div class="screen-container">
+  <div class="container">
 
- <%= simple_form_for @training do |f| %>
-    <div class="vh-90">
-      <%= f.label :average_speed, "What is your average pace?" %>
-      <%= f.input :average_speed,
-                  legend_tag: false,
-                  as: :radio_buttons,
-                  collection: ['Slow', 'Medium','Fast'],
-                  label: false,
-                  collection_wrapper_class: 'category-wrapper',
-                  item_wrapper_class: 'category-item',
-                  input_html: { class: 'category-selector' } %>
-    </div>
+    <h1 class="title">Modify your choices</h1>
 
-    <div class="vh-90">
-      <%= f.label :training_duration,"How long do you want to run?" %>
-      <%= f.input :training_duration,
-                  legend_tag: false,
-                  as: :radio_buttons,
-                  collection: Training::TRAINING_DURATION,
-                  label: false,
-                  collection_wrapper_class: 'category-wrapper',
-                  item_wrapper_class: 'category-item',
-                  input_html: { class: 'category-selector' } %>
-    </div>
+    <%= simple_form_for @training, html: { class: "form" } do |f| %>
 
-    <div class="vh-90">
-      <%= f.label :music_genre, "Select the type of music you'd like for your session" %>
-      <%= f.input :music_genre,
-                  legend_tag: false,
-                  as: :radio_buttons,
-                  collection: ['pop', 'reggae', 'rock', 'rap'],
-                  collection_wrapper_class: 'category-wrapper',
-                  item_wrapper_class: 'category-item',
-                  input_html: { class: 'category-selector' } %>
-    </div>
-  <%= f.submit "Save changes", class: "btn btn-primary" %>
-<% end %>
+      <!-- Question 1 : Vitesse -->
+      <div class="screen active">
+        <h2 class="question">What is your average pace?</h2>
+        <div class="options">
+          <% ['Slow', 'Medium', 'Fast'].each do |speed| %>
+            <div class="option-item">
+              <%= f.radio_button :average_speed, speed, id: "speed-#{speed}", class: 'hidden choice-radio' %>
+              <label for="speed-<%= speed %>" class="choice-label"><%= speed %></label>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Question 2 : Durée -->
+      <div class="screen active">
+        <h2 class="question">How long do you want to run?</h2>
+        <div class="options">
+          <% Training::TRAINING_DURATION.each do |duration| %>
+            <div class="option-item">
+              <%= f.radio_button :training_duration, duration, id: "duration-#{duration}", class: 'hidden choice-radio' %>
+              <label for="duration-<%= duration %>" class="choice-label"><%= duration %></label>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Question 3 : Genre musical -->
+      <div class="screen active">
+        <h2 class="question">Select the type of music you'd like to listen during your session</h2>
+        <div class="options">
+          <% ['pop', 'reggae', 'rock', 'rap'].each do |genre| %>
+            <div class="option-item">
+              <%= f.radio_button :music_genre, genre, id: "music-#{genre}", class: 'hidden choice-radio' %>
+              <label for="music-<%= genre %>" class="choice-label"><%= genre %></label>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <%= f.submit "Save changes", class: "btn btn-primary" %>
+
+    <% end %>
+
+  </div>
+</div>
