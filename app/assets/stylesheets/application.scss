@@ -161,6 +161,12 @@ body {
 }
 
 
+.centering {
+  justify-content: center;
+  width: 90% !important;
+  margin: auto;
+}
+
 .card-centered {
   background-color: #fff; /* Fond blanc */
   color: #000 !important;
@@ -205,14 +211,15 @@ p, h5, h6 {
 
 // Submit button (styled like other options)
 .btn.btn-primary {
-  width: 100%; /* Prend toute la largeur */
+  width: 90%; /* Prend toute la largeur */
   font-size: 1rem;
   padding: 0.75rem;
   border-radius: 12px;
   background-color: #DFFF00;
   border: none;
   margin-top: 1rem;
-  color: black
+  color: black;
+  margin: auto;
 }
 
 
