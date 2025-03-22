@@ -13,6 +13,41 @@
 @import "simple_calendar";
 @import "components/simple_calendar";
 
+
+
+.option-item label {
+  display: inline-block;
+  background-color: #3FB950;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  width: 100%;
+  max-width: 200px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.option-item input[type="radio"].hidden {
+  display: none;
+}
+
+.option-item input[type="radio"].hidden:checked + label {
+  background-color: white;
+  color: #3FB950;
+  border: 2px solid #3FB950;
+}
+
 // Navigation
 .nav-item {
   text-decoration: none;
