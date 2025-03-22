@@ -1,0 +1,13 @@
+<% if trainings.any? %>
+  <ul class="list-group">
+    <% trainings.each do |training| %>
+      <li class="list-group-item">
+        <strong><%= training.name %></strong> - <%= training.training_duration %> min
+        <br>
+        Genre: <%= training.music_genre %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p class="text-muted">Aucun training ce jour-là.</p>
+<% end %>

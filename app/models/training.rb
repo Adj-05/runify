@@ -62,3 +62,8 @@ class Training < ApplicationRecord
       bpm_max = 160
     end
   end
+  private
+
+  def set_default_date
+    self.date ||= Date.today # Définit la date d'aujourd'hui si aucune date n'est donnée
+  end

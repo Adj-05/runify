@@ -1,62 +1,8 @@
-/*  import { Controller } from "@hotwired/stimulus"
+import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="swipe"
 export default class extends Controller {
-  static targets = ["form", "averageSpeed", "trainingDuration", "musicGenre", "button1", "button2"]
-
-  swipe1() {
-    setTimeout(() => {
-      console.log("Retardée d'une seconde.");
-      this.averageSpeedTarget.classList.add("d-none");
-      this.trainingDurationTarget.classList.remove("d-none");
-      this.button1Target.classList.remove("d-none");
-    }, 1000);
-  }
-
-  swipe2() {
-    setTimeout(() => {
-      console.log("Retardée d'une seconde.");
-      this.trainingDurationTarget.classList.add("d-none");
-      this.button1Target.classList.add("d-none");
-      this.button2Target.classList.remove("d-none");
-      this.musicGenreTarget.classList.remove("d-none");
-    }, 1000);
-  }
-
-  back1() {
-    this.averageSpeedTarget.classList.remove("d-none");
-    this.trainingDurationTarget.classList.add("d-none");
-    this.button1Target.classList.add("d-none");
-  }
-
-  back2() {
-    this.trainingDurationTarget.classList.remove("d-none");
-    this.musicGenreTarget.classList.add("d-none");
-    this.button2Target.classList.add("d-none");
-    this.button1Target.classList.remove("d-none");
-  }
- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  import { Controller } from "@hotwired/stimulus";
-
-export default class extends Controller {
-  static targets = ["averageSpeed", "trainingDuration", "musicGenre", "button1", "button2", "progressBar", "form"];
+  static targets = ["input1", "averageSpeed", "trainingDuration", "musicGenre", "button1", "button2", "progressBar", "form"];
 
   connect() {
     this.screens = [this.averageSpeedTarget, this.trainingDurationTarget, this.musicGenreTarget];
@@ -65,6 +11,46 @@ export default class extends Controller {
     this.updateScreens();
     console.log("Stimulus controller connected");
   }
+
+  // swipe1() {
+  //   setTimeout(() => {
+  //     console.log("Retardée d'une seconde.");
+  //     this.averageSpeedTarget.classList.add("d-none");
+  //     this.trainingDurationTarget.classList.remove("d-none");
+  //     this.button1Target.classList.remove("d-none");
+  //   }, "1000");
+
+  // }
+
+  // swipe2() {
+  //   setTimeout(() => {
+  //     console.log("Retardée d'une seconde.");
+  //     this.trainingDurationTarget.classList.add("d-none");
+  //     this.button1Target.classList.add("d-none");
+  //     this.button2Target.classList.remove("d-none");
+  //     this.musicGenreTarget.classList.remove("d-none");
+  //   }, "1000");
+
+  // }
+
+  // back1() {
+  //   this.averageSpeedTarget.classList.remove("d-none");
+  //   this.trainingDurationTarget.classList.add("d-none");
+  //   this.button1Target.classList.add("d-none");
+  // }
+
+  // back2() {
+  //   this.trainingDurationTarget.classList.remove("d-none");
+  //   this.musicGenreTarget.classList.add("d-none");
+  //   this.button2Target.classList.add("d-none");
+  //   this.button1Target.classList.remove("d-none");
+  // }
+
+  // sendForm(event) {
+  //   event.preventDefault();
+  //   this.updateSelection(event);
+  //   setTimeout(() => this.redirectToPreview(), 200);
+  // }
 
   swipe1(event) {
     this.updateSelection(event);
@@ -76,11 +62,6 @@ export default class extends Controller {
     setTimeout(() => this.nextScreen(), 200);
   }
 
-  sendForm(event) {
-    event.preventDefault();
-    this.updateSelection(event);
-    setTimeout(() => this.redirectToPreview(), 200);
-  }
 
   back1() {
     this.previousScreen();
@@ -142,19 +123,14 @@ export default class extends Controller {
       headers: { "Accept": "application/json" },
       body: new FormData(this.formTarget)
     })
-    .then(response => {
-      if (!response.ok) throw new Error("Erreur lors de l'envoi du formulaire");
-      return response.json();
-    })
-    .then(data => {
-      if (data.id) {
-        window.location.href = `/trainings/${data.id}/preview`;
-      } else {
-        console.error("L'ID du training est manquant dans la réponse.");
-      }
-    })
-    .catch(error => {
-      console.error(error);
-    });
+      .then(response => {
+        return response.text();
+      })
+      .then((data) => {
+        document.querySelector('html').innerHTML = data
+   } )
+      .catch(error => {
+        console.error(error);
+      });
   }
 }
