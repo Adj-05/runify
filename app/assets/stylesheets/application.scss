@@ -14,7 +14,9 @@
 @import "components/simple_calendar";
 
 
-.bottom-nav {
+
+
+/* .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
@@ -30,8 +32,7 @@
 
   // margin-bottom: 20px;
 
-}
-
+} */
 .nav-item {
   text-decoration: none;
   color: #888;
@@ -46,4 +47,125 @@
 
 .nav-item i {
   display: block;
+}
+
+.screen-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #121212;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.container {
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.question {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.screen {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.screen.active {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.option-item {
+  width: 100%;
+}
+
+/* Personnalisation des boutons radio */
+.option-item input[type="radio"] {
+  display: none; /* Masquer les boutons radio natifs */
+}
+
+.option-item label {
+  display: block;
+  background: #1E1E1E;
+  padding: 15px;
+  border-radius: 12px;
+  transition: background 0.3s ease-in-out;
+  cursor: pointer;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+}
+
+/* Appliquer uniquement le vert lorsque sélectionné */
+.option-item input[type="radio"]:checked + label {
+  background: #64dd17; /* Vert */
+  color: white;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  display: none;
+}
+
+/* Barre de progression */
+.progress-bar {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #64dd17;
+}
+
+/* Options de sélection */
+.option-item {
+  width: 100%;
+}
+
+.option-item input[type="radio"] {
+  display: none; /* Masquer les boutons radio natifs */
+}
+
+.option-item label {
+  display: block;
+  background: #1E1E1E;
+  padding: 15px;
+  border-radius: 12px;
+  transition: background 0.3s ease-in-out;
+  cursor: pointer;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+}
+
+/* Appliquer uniquement le vert lorsqu'un choix est sélectionné */
+.option-item input[type="radio"]:checked + label {
+  background: #64dd17; /* Vert */
+  color: white;
 }
