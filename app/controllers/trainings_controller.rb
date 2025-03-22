@@ -12,12 +12,27 @@ class TrainingsController < ApplicationController
 
   def history
     start_date = params.fetch(:start_date, Date.today).to_date
-    @trainings = current_user.trainings.where(created_at: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
+
+    @trainings = Training.where(start_time: start_date.beginning_of_month..start_date.end_of_month)
   end
 
-  def show
-    @training = Training.find(params[:id])
-  end
+
+def show
+  @training = Training.find(params[:id])
+end
+
+
+# def create
+#   @training = Training.new(training_params)
+#   @training.user_id = current_user.id
+
+#   if @training.save
+#     redirect_to preview_training_path(@training), notice: "Confirm or edit your choices."
+#   else
+#     puts @training.errors.messages
+#     render :new, status: :unprocessable_entity
+#   end
+# end
 
   def toggle_favorite
     @training.update(favorite_playlist: !@training.favorite_playlist)
@@ -37,7 +52,7 @@ class TrainingsController < ApplicationController
     @training.music_genre = @training.music_genre.downcase
     @training.user_id = current_user.id
 
-    if @training.save
+    if @training.save!
       redirect_to preview_training_path(@training, format: :html), notice: "Confirm or edit your choices."
     else
       render :new, status: :unprocessable_entity
@@ -94,12 +109,12 @@ class TrainingsController < ApplicationController
   private
 
   def training_params
-    params.require(:training).permit(:average_speed, :training_duration, :music_genre, :name, :date)
+    params.require(:training).permit(:average_speed, :training_duration, :music_genre, :name, :date, :start_time)
   end
 
-  def set_default_start_time
-    self.start_time ||= Time.current # Définit la date actuelle si elle est vide
-  end
+  # def set_default_start_time
+  #   self.start_time ||= Time.current # Définit la date actuelle si elle est vide
+  # end
 
   def set_training
     @training = Training.find_by(id: params[:id])

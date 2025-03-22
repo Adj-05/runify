@@ -1,0 +1,29 @@
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.9); /* Fond noir légèrement transparent */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 15px 0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-shadow: 0px -2px 10px rgba(255, 255, 255, 0.1);
+}
+
+.bottom-nav .nav-item {
+  text-decoration: none;
+  color: white;
+  font-size: 22px;
+  transition: all 0.3s ease;
+}
+
+.bottom-nav .nav-item.active {
+  color: #b2ff59; /* Vert néon comme l'image */
+}
+
+.bottom-nav .nav-item:hover {
+  color: #b2ff59;
+}
