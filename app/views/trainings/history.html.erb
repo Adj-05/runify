@@ -1,4 +1,4 @@
-<h2 class="text-center mt-4">📅 Historique de mes trainings</h2>
+<h2 class="text-center mt-4">📅 Historic of my trainings</h2>
 
 <div class="calendar-container">
   <%= month_calendar(events: @trainings) do |date, trainings| %>
@@ -7,7 +7,7 @@
     <% trainings.each do |training| %>
       <div class="training">
         <p class="fw-bold"><%= training.name %></p>
-        <small>Durée : <%= training.training_duration %> min</small><br>
+        <small>Duration : <%= training.training_duration %> min</small><br>
         <small>Genre : <%= training.music_genre %></small>
       </div>
     <% end %>
