@@ -1,17 +1,13 @@
-<div class = "home">
-
-  <div class = "contenu-home">
-  <h1>Runify</h1>
-  <%= image_tag "runner.png", width: 400, height: 400 %>
-  <button class = "login-button">Get started with Spotify</button>
-  <div class = "titre">
-    <p>Transform each run into an immersive experience</p>
-    <div class="p-wave"></div>
+<div class="home">
+  <div class="contenu-home">
+    <h1>Runify</h1>
+    <%= image_tag "runner.png", class: "runner-image" %>
+    <%= link_to trainings_path, class: "login-button" do %>
+      <button class="login-button">Get started with Spotify</button>
+    <% end %>
+    <div class="titre">
+      <p>Transform each run into an immersive experience</p>
+      <div class="p-wave"></div>
+    </div>
   </div>
-
 </div>
-</div>
-
-
-
-<%#= image_tag "runner.jpg" class = "image", width: 300, height: 300 %>

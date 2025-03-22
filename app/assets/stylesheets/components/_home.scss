@@ -1,57 +1,113 @@
-
-.home, body{
+body {
   background: rgb(6, 6, 6);
+  display: flex;
+  justify-content: center;
   align-items: center;
+  height: 100vh;
+  margin: 0;
+  flex-direction: column;
 }
 
-h1{
-  color:white;
-
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0px;
 }
 
+h1 {
+  color: white;
+  font-size: 2.2rem;
+  margin-bottom: 50px;
+  margin-top: 5;
+}
 
-p{
-  color:rgb(255, 254, 254);
+p {
+  color: rgb(255, 254, 254);
   font-family: Georgia, serif;
   background-color: rgb(23, 22, 22);
-  width : 300px;
-  height: 200px;
-  border-radius: 11px;
+  width: 80%;
+  max-width: 350px;
+  height: auto;
+  border-radius: 15px;
   display: flex;
-  position: relative;
   align-items: center;
   justify-content: center;
   padding: 20px;
-  margin-top: 30px;
-  margin-left: 20%;
   text-align: center;
-  font-size: 25px;
-  overflow: hidden;
+  font-size: 1.2rem;
+  margin: 0 auto;
+  margin-bottom: 60px;
 }
 
-.login-button{
+.runner-image {
+  width: 100%;
+  height: auto;
+  margin-bottom: 60px;
+  border: solid rgb(116, 117, 115) 1px
+}
+
+.login-button {
   background-color: greenyellow;
-  width: 350px;
+  width: 70%;
+  max-width: 350px;
   height: 50px;
-  border-radius: 20%;
-  margin-left: 10%;
-  margin-top: 10%;
+  border-radius: 10px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
 }
 
-.p-wave {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 200%;
-  height: 40px;
-  background: url('https://upload.wikimedia.org/wikipedia/commons/9/98/Animated_Waves.svg');
-  background-size: cover;
-  animation: wave-animation 5s infinite linear;
-  opacity: 0.6;
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 1.3rem;
+    width: 90%;
+    margin-bottom: 50px;
+  }
+
+  .login-button {
+    width: 70%;
+    margin-bottom: 30px;
+  }
+
+  .runner-image {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
 }
 
-/* Animation de la vague */
-@keyframes wave-animation {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+@media (max-width: 400px) {
+  h1 {
+    margin-top: 0;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    margin-left: 0;
+  }
+
+  p {
+    font-size: 1.3rem;
+    padding: 20px;
+    width: 90%;
+    margin-bottom: 50px;
+  }
+
+  .login-button {
+    width: 80%;
+    margin-bottom: 30px;
+  }
+
+  .runner-image {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 }
