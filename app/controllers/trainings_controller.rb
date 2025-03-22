@@ -22,17 +22,17 @@ def show
 end
 
 
-def create
-  @training = Training.new(training_params)
-  @training.user_id = current_user.id
+# def create
+#   @training = Training.new(training_params)
+#   @training.user_id = current_user.id
 
-  if @training.save
-    redirect_to preview_training_path(@training), notice: "Confirm or edit your choices."
-  else
-    render :new, status: :unprocessable_entity
-  end
-end
-before_action :set_training, only: [:toggle_favorite]
+#   if @training.save
+#     redirect_to preview_training_path(@training), notice: "Confirm or edit your choices."
+#   else
+#     puts @training.errors.messages
+#     render :new, status: :unprocessable_entity
+#   end
+# end
 
   def toggle_favorite
     @training.update(favorite_playlist: !@training.favorite_playlist)
@@ -52,7 +52,7 @@ before_action :set_training, only: [:toggle_favorite]
     @training.music_genre = @training.music_genre.downcase
     @training.user_id = current_user.id
 
-    if @training.save
+    if @training.save!
       redirect_to preview_training_path(@training, format: :html), notice: "Confirm or edit your choices."
     else
       render :new, status: :unprocessable_entity
@@ -109,12 +109,12 @@ before_action :set_training, only: [:toggle_favorite]
   private
 
   def training_params
-    params.require(:training).permit(:average_speed, :training_duration, :music_genre, :name, :date)
+    params.require(:training).permit(:average_speed, :training_duration, :music_genre, :name, :date, :start_time)
   end
 
-  def set_default_start_time
-    self.start_time ||= Time.current # Définit la date actuelle si elle est vide
-  end
+  # def set_default_start_time
+  #   self.start_time ||= Time.current # Définit la date actuelle si elle est vide
+  # end
 
   def set_training
     @training = Training.find_by(id: params[:id])
