@@ -3,15 +3,21 @@
     <h5 class="mt-2 fw-bold"><%= current_user.spotify_name %></h5>
     <div class="position-relative d-flex justify-content-center my-3">
       <div class="progress-circle border border-3 border-primary-subtle rounded-circle d-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
-        <h4 class="fw-bold"><%= current_user.trainings.count %> sessions🔥</h4>
+        <h4 class="fw-bold"><%= current_user.trainings.count %> Sessions🔥</h4>
       </div>
     </div>
   </div>
 
   <div class="d-grid gap-2 my-3">
-    <%= link_to "▶ Last playlist", current_user.trainings.last, class: "btn btn-primary rounded-3 fw-bold" %>
+    <div class="d-flex justify-content-center my-3">
+<%= link_to raw('<span style="color: #3fb950;">🎧</span> Last playlist'), current_user.trainings.last, class: "btn btn-primary rounded-3 fw-bold px-4" %>
+
+</div>
+
+
+
     <div class="d-grid gap-2 my-3">
-<%= link_to "📅 Voir mes anciens trainings", history_trainings_path, class: "btn btn-outline-primary rounded-3 fw-bold" %>
+<%= link_to raw('<span style="color: #3fb950;">🗓️</span> Previous trainings'), history_trainings_path, class: "btn btn-outline-primary rounded-3 fw-bold px-4" %>
 </div>
 
   </div>
@@ -33,7 +39,7 @@
         <p class="text-muted small">Speed: <%= training.average_speed %></p>
            <div class="text-end">
       <%= link_to toggle_favorite_training_path(training), method: :patch, remote: true, class: "favorite-icon", id: "favorite-icon-#{training.id}" do %>
-        <i class="fa<%= training.favorite_playlist? ? 's' : 'r' %> fa-heart text-danger fs-4"></i>
+        <i class="fa<%= training.favorite_playlist? ? 's' : 'r' %> fa-heart fs-4" style="color: #3fb950;"></i>
       <% end %>
     </div>
       </div>
