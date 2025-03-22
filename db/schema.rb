@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema[7.1].define(version: 2025_03_15_162205) do
-
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,9 +55,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_15_162205) do
     t.datetime "updated_at", null: false
     t.boolean "favorite_playlist"
     t.boolean "confirmed"
-    t.string "spotify_uri"
-
     t.datetime "start_time"
+    t.string "spotify_uri"
     t.index ["user_id"], name: "index_trainings_on_user_id"
   end
 
