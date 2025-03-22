@@ -1,13 +1,15 @@
 <div class="container mt-4">
-<div class="card-2">
-  <h5 class="mt-2 fw-bold text-light text-center"><%= current_user.spotify_name %></h5>
+  <div class="card card-centered">
+    <h5 class="mt-2 fw-bold text-dark text-center"><%= current_user.spotify_name %></h5>
 
-  <div class=" position-relative d-flex justify-content-center my-3">
-    <div class="progress-circle border border-3 border-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
-      <h4 class="fw-bold text-danger"><%= current_user.trainings.count %>🔥</h4>
+    <div class="position-relative d-flex justify-content-center my-3">
+      <div class="progress-circle white-circle d-flex align-items-center justify-content-center">
+        <h4 class="fw-bold text-dark"><%= current_user.trainings.count %>🔥</h4>
+      </div>
     </div>
   </div>
 </div>
+
   <div class="d-grid gap-2 my-3">
     <%= link_to "🎧 Last playlist", current_user.trainings.last, class: "btn btn-primary rounded-3 fw-bold green-button" %>
   <%= link_to raw('<span style="color: #3fb950;">🗓️</span> See my previous trainings'), history_trainings_path,
