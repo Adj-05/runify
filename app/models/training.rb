@@ -1,6 +1,6 @@
 class Training < ApplicationRecord
   belongs_to :user
-  has_many :playlists
+  has_many :playlists, dependent: :destroy
   # validates :start_time, presence: true
 
   AVERAGE_SPEED = ["Slow : 7.1 to 8.3 mins/KM", "Medium : 5.3 to 6.5 mins/KM", "Fast : 4 to 5.1 mins/KM"]
@@ -19,7 +19,6 @@ class Training < ApplicationRecord
   def formatted_time
     start_time.strftime('%d %B %Y à %H:%M')
   end
-
 
   def generate_training_name
     # Donne l'heure sous forme entier arrondi inferieur
@@ -53,7 +52,6 @@ class Training < ApplicationRecord
       return 160
     end
   end
-  end
 
   def generate_playlist
     case average_speed
@@ -68,8 +66,10 @@ class Training < ApplicationRecord
       bpm_max = 160
     end
   end
+
   private
 
   def set_default_date
     self.date ||= Date.today # Définit la date d'aujourd'hui si aucune date n'est donnée
   end
+end
