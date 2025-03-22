@@ -1,0 +1,27 @@
+<b><h2 class="text-center my-4 black">❤️ My favorites</h2></b>
+
+<div class="container">
+  <% @favorite_trainings.each do |training| %>
+    <div class="card shadow-sm border-0 rounded-4 p-3 mb-3">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <span class="text-danger fs-3 me-3">🏃</span>
+          <h5 class="mb-0 fw-bold"><%= training.name %></h5>
+        </div>
+        <span class="text-muted small"><%= training.created_at.strftime("%d %b %Y %H:%M") %></span>
+      </div>
+
+      <div class="mt-2">
+        <p class="text-muted small mb-1"><strong>⏳ Duration:</strong> <%= training.training_duration %> min</p>
+        <p class="text-muted small mb-1"><strong>🎵 Genre:</strong> <%= training.music_genre %></p>
+        <p class="text-muted small"><strong>⚡ Speed:</strong> <%= training.average_speed %></p>
+      </div>
+
+      <div class="text-end">
+        <%= link_to toggle_favorite_training_path(training), method: :patch, remote: true, class: "favorite-icon", id: "favorite-icon-#{training.id}" do %>
+          <i class="fa<%= training.favorite_playlist? ? 's' : 'r' %> fa-heart text-danger fs-3"></i>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

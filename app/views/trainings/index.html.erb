@@ -31,6 +31,11 @@
         <p class="text-muted small mb-0">Duration: <%= training.training_duration %> min</p>
         <p class="text-muted small mb-0">Genre: <%= training.music_genre %></p>
         <p class="text-muted small">Speed: <%= training.average_speed %></p>
+           <div class="text-end">
+      <%= link_to toggle_favorite_training_path(training), method: :patch, remote: true, class: "favorite-icon", id: "favorite-icon-#{training.id}" do %>
+        <i class="fa<%= training.favorite_playlist? ? 's' : 'r' %> fa-heart text-danger fs-4"></i>
+      <% end %>
+    </div>
       </div>
     <% end %>
   <% else %>
