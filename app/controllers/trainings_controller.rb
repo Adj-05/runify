@@ -12,8 +12,7 @@ class TrainingsController < ApplicationController
 
   def history
     start_date = params.fetch(:start_date, Date.today).to_date
-
-    @trainings = Training.where(start_time: start_date.beginning_of_month..start_date.end_of_month)
+    @trainings = Training.where(date: start_date.beginning_of_month..start_date.end_of_month)
   end
 
 
@@ -21,7 +20,9 @@ def show
   @training = Training.find(params[:id])
 end
 
-
+def set_default_date
+  self.date ||= created_at.to_date
+end
 # def create
 #   @training = Training.new(training_params)
 #   @training.user_id = current_user.id
