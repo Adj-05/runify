@@ -1,6 +1,7 @@
 class Training < ApplicationRecord
   belongs_to :user
   has_many :playlists
+  validates :start_time, presence: true
 
   AVERAGE_SPEED = ["Slow : 7.1 to 8.3 mins/KM", "Medium : 5.3 to 6.5 mins/KM", "Fast : 4 to 5.1 mins/KM"]
 
@@ -14,6 +15,11 @@ class Training < ApplicationRecord
   before_validation :generate_training_name, only: [:create]
 
   before_validation :generate_playlist
+
+  def formatted_time
+    start_time.strftime('%d %B %Y à %H:%M')
+  end
+
 
   def generate_training_name
     # Donne l'heure sous forme entier arrondi inferieur
