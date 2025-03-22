@@ -1,7 +1,57 @@
-body{
-  background: white;
+
+.home, body{
+  background: rgb(6, 6, 6);
+  align-items: center;
 }
 
 h1{
   color:white;
+
+}
+
+
+p{
+  color:rgb(255, 254, 254);
+  font-family: Georgia, serif;
+  background-color: rgb(23, 22, 22);
+  width : 300px;
+  height: 200px;
+  border-radius: 11px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 30px;
+  margin-left: 20%;
+  text-align: center;
+  font-size: 25px;
+  overflow: hidden;
+}
+
+.login-button{
+  background-color: greenyellow;
+  width: 350px;
+  height: 50px;
+  border-radius: 20%;
+  margin-left: 10%;
+  margin-top: 10%;
+}
+
+.p-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 40px;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/9/98/Animated_Waves.svg');
+  background-size: cover;
+  animation: wave-animation 5s infinite linear;
+  opacity: 0.6;
+}
+
+/* Animation de la vague */
+@keyframes wave-animation {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
