@@ -28,6 +28,19 @@ def create
     render :new, status: :unprocessable_entity
   end
 end
+before_action :set_training, only: [:toggle_favorite]
+
+def toggle_favorite
+  @training.update(favorite_playlist: !@training.favorite_playlist)
+  respond_to do |format|
+    format.html { redirect_to trainings_path }
+    format.js
+  end
+end
+
+def favorites
+  @favorite_trainings = Training.where(favorite_playlist: true)
+end
 
 
 
