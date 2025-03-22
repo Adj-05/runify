@@ -58,6 +58,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_03_15_162205) do
     t.boolean "favorite_playlist"
     t.boolean "confirmed"
     t.string "spotify_uri"
+
     t.datetime "start_time"
     t.index ["user_id"], name: "index_trainings_on_user_id"
   end

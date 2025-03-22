@@ -1,33 +1,65 @@
-<div class="simple-calendar">
-  <div class="calendar-heading">
-    <%= link_to t('simple_calendar.previous', default: 'Previous'), calendar.url_for_previous_view %>
-    <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
-    <%= link_to t('simple_calendar.next', default: 'Next'), calendar.url_for_next_view %>
+<div class="container mt-4">
+  <div class="card text-center shadow-lg p-4 border-0 rounded-4">
+    <div class="position-relative d-flex justify-content-center my-3">
+        <h4 class="fw-bold"><%= start_date.strftime('%B %Y') %></h4>
+      </div>
+    </div>
   </div>
 
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <% date_range.slice(0, 7).each do |day| %>
-          <th><%= t('date.abbr_day_names')[day.wday] %></th>
-        <% end %>
-      </tr>
-    </thead>
+  <div class="d-flex justify-content-between my-3">
+    <%= link_to "⬅", calendar.url_for_previous_view, class: "btn btn-outline-primary rounded-3 fw-bold" %>
+    <%= link_to "➡", calendar.url_for_next_view, class: "btn btn-outline-primary rounded-3 fw-bold" %>
+  </div>
 
-    <tbody>
-      <% date_range.each_slice(7) do |week| %>
+  <div class="table-responsive d-none d-md-block">
+    <table class="table table-bordered text-center">
+      <thead class="bg-light">
         <tr>
-          <% week.each do |day| %>
-            <%= content_tag :td, class: calendar.td_classes_for(day) do %>
-              <% if defined?(Haml) && respond_to?(:block_is_haml?) && block_is_haml?(passed_block) %>
-                <% capture_haml(day, sorted_events.fetch(day, []), &passed_block) %>
-              <% else %>
-                <% passed_block.call day, sorted_events.fetch(day, []) %>
-              <% end %>
-            <% end %>
+          <% (start_date.beginning_of_month..start_date.end_of_month).to_a.slice(0, 7).each do |day| %>
+            <th class="p-2"><%= t('date.abbr_day_names')[day.wday] %></th>
           <% end %>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% (start_date.beginning_of_month..start_date.end_of_month).to_a.each_slice(7) do |week| %>
+          <tr>
+            <% week.each do |day| %>
+              <td class="p-3 border rounded-3 <%= calendar.td_classes_for(day) %>" style="min-width: 50px;">
+                <div class="fw-bold"><%= day.day %></div>
+                <% events = sorted_events.fetch(day, []) %>
+                <% if events.any? %>
+                  <% events.each do |event| %>
+                    <div class="badge bg-primary w-100 mt-2"><%= event.name %></div>
+                  <% end %>
+                <% else %>
+                  <div class="text-muted small mt-2">Aucun training</div>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Version mobile -->
+  <div class="d-md-none">
+    <% (start_date.beginning_of_month..start_date.end_of_month).to_a.each_slice(7) do |week| %>
+      <div class="d-flex flex-wrap justify-content-between mb-2">
+        <% week.each do |day| %>
+          <div class="card text-center shadow-sm p-2 border-0 rounded-3 m-1" style="width: 45%; min-width: 100px;">
+            <div class="fw-bold"><%= day.day %></div>
+            <% events = sorted_events.fetch(day, []) %>
+            <% if events.any? %>
+              <% events.each do |event| %>
+                <div class="badge bg-primary w-100 mt-2"><%= event.name %></div>
+              <% end %>
+            <% else %>
+              <div class="text-muted small mt-2">Aucun training</div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
