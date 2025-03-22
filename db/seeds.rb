@@ -1,25 +1,68 @@
 require "open-uri"
 
+p "destroying all users"
 User.destroy_all
+p "users destroyed"
+
+p "destroying all playlists"
+Playlist.destroy_all
+p "playlists destroyed"
+
+p "destroying all musics"
+Music.destroy_all
+p "musics destroyed"
+
+p "destroying all trrainings"
+Training.destroy_all
+p "trainings destroyed"
+
+p "creating users"
 user1 = User.new(email: "sasha@runify.com", password: "123456", password_confirmation: "123456")
 user1.save!
 user2 = User.new(email: "meven@runify.com", password: "123456", password_confirmation: "123456")
 user2.save!
 user3 = User.new(email: "aurelie@runify.com", password: "123456", password_confirmation: "123456")
 user3.save!
+p "users created"
 
+p "creating trainings"
+Training.destroy_all
+training1 = Training.new(
+  average_speed: "10",
+  training_duration: "150",
+  music_genre: "rap",
+  name: "Rap training",
+  user_id: User.last.id,
+)
+training1.save!
 
-Playlist.destroy_all
-playlist1 = Playlist.new(name: "Rap dynamique")
+training2 = Training.new(
+  average_speed: "20",
+  training_duration: "100",
+  music_genre: "rap",
+  name: "rap training 2",
+  user_id: User.last.id,
+)
+training2.save!
+
+training3 = Training.new(
+  average_speed: "15",
+  training_duration: "250",
+  music_genre: "rock",
+  name: "rock training",
+  user_id: User.last.id,
+)
+training3.save!
+p "trainings created"
+
+p "creating playlists"
+playlist1 = Playlist.new(name: "Rap dynamique", training: training1)
 playlist1.save!
-playlist2 = Playlist.new(name: "Rock dynamique")
+playlist2 = Playlist.new(name: "Rock dynamique", training: training2)
 playlist2.save!
+p "playlists created"
 
-
-RSpotify.<
-
-
-Music.destroy_all
+p "creating musics"
 music1 = Music.new(title: "Bolide allemand", genre: "rap", duration: 176, bpm: 132, playlist_id: playlist1.id)
 music1.save!
 music2 = Music.new(title: "Meuda", genre: "rap", duration: 152, bpm: 142, playlist_id: playlist1.id)
@@ -60,8 +103,6 @@ music19 = Music.new(title: "Mona Lisa", genre: "rap", duration: 187, bpm: 134, p
 music19.save!
 music20 = Music.new(title: "AMBER", genre: "rap", duration: 182, bpm: 141, playlist_id: playlist1.id)
 music20.save!
-
-
 music21 = Music.new(title: "Are You Gonna Be My Girl", genre: "rock", duration: 213, bpm: 104, playlist_id: playlist2.id)
 music21.save!
 music22 = Music.new(title: "Can't Stop", genre: "rock", duration: 269, bpm: 91, playlist_id: playlist2.id)
@@ -102,12 +143,4 @@ music39 = Music.new(title: "Whenever, Wherever", genre: "rock", duration: 196, b
 music39.save!
 music40 = Music.new(title: "Dilemma", genre: "rock", duration: 289, bpm: 85, playlist_id: playlist2.id)
 music40.save!
-
-
-Training.destroy_all
-training1 = Training.new(average_speed: "10", training_duration: "150", music_genre: "rap", name: "Rap training", user_id: User.last.id, playlist_id: playlist1.id)
-training1.save!
-training2 = Training.new(average_speed: "20", training_duration: "100", music_genre: "rap", name: "rap training 2", user_id: User.last.id, playlist_id: playlist1.id)
-training2.save!
-training3 = Training.new(average_speed: "15", training_duration: "250", music_genre: "rock", name: "rock training", user_id: User.last.id, playlist_id: playlist2.id)
-training3.save!
+p "mucis created"

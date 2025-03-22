@@ -1,5 +1,5 @@
 class Playlist < ApplicationRecord
-  has_many :musics
+  has_many :musics, dependent: :destroy
   belongs_to :training
 
   accepts_nested_attributes_for :musics

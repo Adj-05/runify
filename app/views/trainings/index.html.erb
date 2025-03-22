@@ -1,16 +1,20 @@
 <div class="container mt-4">
+<div class="card-2">
   <h5 class="mt-2 fw-bold text-light text-center"><%= current_user.spotify_name %></h5>
 
-  <div class="position-relative d-flex justify-content-center my-3">
+  <div class=" position-relative d-flex justify-content-center my-3">
     <div class="progress-circle border border-3 border-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
       <h4 class="fw-bold text-danger"><%= current_user.trainings.count %>🔥</h4>
     </div>
   </div>
-
+</div>
   <div class="d-grid gap-2 my-3">
-    <%= link_to "▶ Last playlist", current_user.trainings.last, class: "btn btn-danger rounded-3 fw-bold" %>
-    <%= link_to "📅 Voir mes anciens trainings", history_trainings_path, class: "btn btn-outline-light rounded-3 fw-bold" %>
-  </div>
+    <%= link_to "🎧 Last playlist", current_user.trainings.last, class: "btn btn-primary rounded-3 fw-bold green-button" %>
+  <%= link_to raw('<span style="color: #3fb950;">🗓️</span> See my previous trainings'), history_trainings_path,
+    class: "fw-bold px-4 py-2 rounded-4 border border-2 text-decoration-none",
+    style: "border-color: #3FB950; color: #3FB950; background-color: transparent; font-size: 1rem; width: 85%; text-align: center;" %>
+</div>
+
 
   <% if @trainings.present? %>
     <h2 class="text-center my-4 text-light">🏋️‍♂️ My sessions</h2>
@@ -41,7 +45,7 @@
       <% end %>
     </div>
   <% else %>
-    <p class="text-center text-muted mt-3">Aucun training disponible.</p>
+    <p class="text-center text-muted mt-3">No training Available.</p>
   <% end %>
 </div>
 
