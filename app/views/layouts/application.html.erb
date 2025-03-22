@@ -16,6 +16,7 @@
     <% if action_name != "home" %>
       <%= render "shared/navbar" %>
     <% end %>
+
     <%= render "shared/flashes" %>
 
     <%= yield %>
@@ -23,7 +24,6 @@
     <% if action_name != "home" %>
       <%= render "shared/footer" %>
     <% end %>
-
 
   </body>
 </html>
