@@ -18,15 +18,17 @@ class Playlist < ApplicationRecord
         musics: build_tracks(playlist)
       }.merge(attributes)
 
-      Playlist.new(playlist_attributes)
+      @playlist = Playlist.new(playlist_attributes)
     end
 
     def create_from_api(user:, name:, bpm_min:, bpm_max:, dur_min:, dur_max:, count:, **attributes)
       initialize_from_api(user:, name:, bpm_min:, bpm_max:, dur_min:, dur_max:, count:, **attributes).save
+      @playlist
     end
 
     def create_from_api!(user:, name:, bpm_min:, bpm_max:, dur_min:, dur_max:, count:, **attributes)
       initialize_from_api(user:, name:, bpm_min:, bpm_max:, dur_min:, dur_max:, count:, **attributes).save!
+      @playlist
     end
 
     private

@@ -13,7 +13,6 @@ class TrainingsController < ApplicationController
     @trainings = current_user.trainings.where(created_at: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
   end
 
-
 def show
   @training = Training.find(params[:id])
 end
@@ -29,15 +28,32 @@ def create
     render :new, status: :unprocessable_entity
   end
 end
+before_action :set_training, only: [:toggle_favorite]
+
+def toggle_favorite
+  @training.update(favorite_playlist: !@training.favorite_playlist)
+  respond_to do |format|
+    format.html { redirect_to trainings_path }
+    format.js
+  end
+end
+
+def favorites
+  @favorite_trainings = Training.where(favorite_playlist: true)
+end
+
 
 
   def preview
     @training = Training.find(params[:id])
+    #@playlist = Playlist.find_by(training: @training)
+    #p "//////////////////////////////////////////////////////#{@playlist.id}"
   end
 
   def confirm
     @training = Training.find(params[:id])
-    @training.update(confirmed: true) # création colonne "confirmed" + migration
+    @training.update(confirmed: true) # Assurez-vous que la colonne "confirmed" existe dans la DB
+
     begin
       @playlist = Playlist.create_from_api!(
         user: current_user,
@@ -49,19 +65,22 @@ end
         dur_min: @training.training_duration,
         dur_max: @training.training_duration
       )
-    redirect_to playlists_path, notice: "Your playlist is ready, enjoy your session!"
+
+
+
+      # Supposons que l'API renvoie une URI Spotify pour la playlist
+       #if @playlist.respond_to?(:spotify_uri) && @playlist.spotify_uri.present?
+        # @training.update(spotify_uri: @playlist.spotify_uri)
+
+
+      flash[:notice] = "Your playlist is ready, enjoy your session!"
     rescue StandardError => e
-      Rails.logger.error "Error while creating your playlist : #{e.message}"
-      flash[:alert] = "Your playlist couldn't be created but your training has been saved"
+     Rails.logger.error "Error while creating your playlist: #{e.message}"
+     flash[:alert] = "Your playlist couldn't be created, but your training has been saved."
     end
 
-    # if @training.save
-    #   @playlist = Playlist.create_from_api!(user: current_user, name: "You got this 💪🏾", count: 25, training: @training, bpm_min: @training.bpm_min, bpm_max:  @training.bpm_max, dur_min: @training.training_duration, dur_max: @training.training_duration)
-    #   p "//////////////////////////////////////////////////////////////////////////////// #{@training.bpm_min} #{@training.bpm_max}"
-    #   redirect_to training_path(@training)
-    # else
-    #   render :new, status: :unprocessable_entity
-    # end
+    redirect_to playlist_path(@playlist)
+
   end
 
   def edit
@@ -80,8 +99,9 @@ end
   private
 
   def training_params
-    params.require(:training).permit(:average_speed, :training_duration, :music_genre, :name)
+    params.require(:training).permit(:average_speed, :training_duration, :music_genre, :name, :date)
   end
+
 
 
   def set_default_start_time
