@@ -117,6 +117,43 @@
   color: white;
 }
 
+
+
+body {
+  background-color: #000 !important; /* Fond noir pour la page */
+  color: #fff !important; /* Texte blanc */
+}
+
+.card {
+  background-color: #fff !important; /* Fond blanc pour les cartes */
+  color: #000 !important; /* Texte noir dans les cartes */
+  border-radius: 15px !important; /* Coins arrondis comme sur l’image */
+  padding: 15px;
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1); /* Ombre légère */
+}
+
+.container, .text-muted {
+  color: #fff !important; /* Texte blanc sur le fond noir */
+}
+
+p, h4, h5, h6 {
+  color: #000 !important; /* Texte noir dans les cartes */
+}
+
+.progress-circle {
+  border-color: #f44336 !important; /* Cercle rouge */
+}
+
+.favorite-icon i {
+  color: red !important; /* Cœur rouge */
+}
+
+
+
+
+
+
+
 // Submit button (styled like other options)
 .btn.btn-primary {
   width: 100%;
@@ -128,6 +165,23 @@
   border: none;
   margin-top: 1rem;
 }
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #ddd;
+}
+
+
+
+
+.card {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
 
 .btn.btn-primary:hover {
   background-color: darken(#e63946, 5%);
