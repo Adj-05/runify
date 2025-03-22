@@ -1,16 +1,27 @@
 <div class="container mt-4">
   <h5 class="mt-2 fw-bold text-light text-center"><%= current_user.spotify_name %></h5>
 
-  <div class="position-relative d-flex justify-content-center my-3">
-    <div class="progress-circle border border-3 border-danger rounded-circle d-flex align-items-center justify-content-center" style="width: 120px; height: 120px;">
-      <h4 class="fw-bold text-danger"><%= current_user.trainings.count %>🔥</h4>
-    </div>
+ <div class="position-relative d-flex justify-content-center my-3">
+  <div class="progress-circle border border-3 rounded-circle d-flex align-items-center justify-content-center"
+       style="width: 120px; height: 120px; border-color: red;">
+    <h4 class="fw-bold mb-0">
+      <span class="text-white fw-bold"><%= current_user.trainings.count %></span>
+      <span style="color: #3FB950;">🔥</span>
+    </h4>
   </div>
+</div>
 
-  <div class="d-grid gap-2 my-3">
-    <%= link_to "▶ Last playlist", current_user.trainings.last, class: "btn btn-danger rounded-3 fw-bold" %>
-    <%= link_to "📅 Voir mes anciens trainings", history_trainings_path, class: "btn btn-outline-light rounded-3 fw-bold" %>
-  </div>
+
+  <!-- Boutons stylés vert & noir -->
+  <div class="d-flex flex-column align-items-center gap-3 my-4">
+  <%= link_to raw('<span style="color: #3fb950;">🎧</span> Last playlist'), current_user.trainings.last,
+    class: "fw-bold px-4 py-2 rounded-4 border-0 text-decoration-none",
+    style: "background-color: #0D1117; color: #3FB950; font-size: 1rem; width: 85%; text-align: center;" %>
+
+  <%= link_to raw('<span style="color: #3fb950;">🗓️</span> See my previous trainings'), history_trainings_path,
+    class: "fw-bold px-4 py-2 rounded-4 border border-2 text-decoration-none",
+    style: "border-color: #3FB950; color: #3FB950; background-color: transparent; font-size: 1rem; width: 85%; text-align: center;" %>
+</div>
 
   <% if @trainings.present? %>
     <h2 class="text-center my-4 text-light">🏋️‍♂️ My sessions</h2>
