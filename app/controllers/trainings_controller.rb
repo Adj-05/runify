@@ -1,5 +1,7 @@
 class TrainingsController < ApplicationController
 
+  before_action :set_training, only: [:toggle_favorite]
+
   def new
     @training = Training.new
   end
@@ -15,6 +17,18 @@ class TrainingsController < ApplicationController
 
   def show
     @training = Training.find(params[:id])
+  end
+
+  def toggle_favorite
+    @training.update(favorite_playlist: !@training.favorite_playlist)
+    respond_to do |format|
+      format.html { redirect_to trainings_path }
+      format.js
+    end
+  end
+
+  def favorites
+    @favorite_trainings = Training.where(favorite_playlist: true)
   end
 
 
@@ -83,12 +97,9 @@ class TrainingsController < ApplicationController
     params.require(:training).permit(:average_speed, :training_duration, :music_genre, :name, :date)
   end
 
-
-
   def set_default_start_time
     self.start_time ||= Time.current # Définit la date actuelle si elle est vide
   end
-
 
   def set_training
     @training = Training.find_by(id: params[:id])
