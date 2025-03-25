@@ -22,9 +22,6 @@ Rails.application.routes.draw do
     end
   end
 
-
-
-
   resources :trainings do
     collection do
       get :history
