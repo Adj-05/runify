@@ -18,8 +18,8 @@
   <% end %>
 
   <%= link_to raw('<span style="color: #3fb950;">🗓️</span> See my previous trainings'), history_trainings_path,
-    class: "fw-bold px-4 py-2 rounded-4 border border-2 text-decoration-none centering",
-    style: "border-color: #3FB950; color: white; background-color: transparent; font-size: 1rem; width: 85%; text-align: center;" %>
+      class: "fw-bold px-4 py-2 rounded-4 border border-2 text-decoration-none centering",
+      style: "border-color: #3FB950; color: white; background-color: transparent; font-size: 1rem; width: 85%; text-align: center;" %>
 </div>
 
 <% if @trainings.present? %>
@@ -52,11 +52,18 @@
           <p class="text-muted small">No playlist available for this training.</p>
         <% end %>
 
-        <div class="text-end">
-          <%= link_to toggle_favorite_training_path(training), method: :patch, remote: true, class: "favorite-icon", id: "favorite-icon-#{training.id}" do %>
+        <div class="text-end d-flex justify-content-end align-items-center gap-3">
+          <!-- Icône Favori -->
+          <%= button_to toggle_favorite_training_path(training), method: :patch,class: "favorite-icon", id: "favorite-icon-#{training.id}" do %>
             <i class="fa<%= training.favorite_playlist? ? 's' : 'r' %> fa-heart text-danger fs-3"></i>
           <% end %>
+
+          <!-- Icône Poubelle -->
+          <%= button_to training_path(training), method: :delete, data: { confirm: "Supprimer cette session ?" }, class: "text-danger fs-5" do %>
+            <i class="fa fa-trash"></i>
+          <% end %>
         </div>
+
       </div>
     <% end %>
   </div>

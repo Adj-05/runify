@@ -107,6 +107,13 @@ end
     end
   end
 
+  def destroy
+    @training = Training.find(params[:id])
+    @training.destroy
+    redirect_to trainings_path, status: :see_other, notice: "Training successfully deleted!"
+  end
+
+
   private
 
   def training_params
