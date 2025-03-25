@@ -16,6 +16,15 @@
         <p class="text-muted small mb-1"><strong>🎵 Genre:</strong> <%= training.music_genre %></p>
         <p class="text-muted small"><strong>⚡ Speed:</strong> <%= training.average_speed %></p>
       </div>
+              <% if training.playlists.any? %>
+          <div class="mt-3">
+            <% training.playlists.each do |playlist| %>
+              <%= link_to "playlist", playlist_path(playlist), class: "btn btn-primary btn-link" %><br>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="text-muted small">No playlist available for this training.</p>
+        <% end %>
 
       <div class="text-end">
         <%= link_to toggle_favorite_training_path(training), method: :patch, remote: true, class: "favorite-icon", id: "favorite-icon-#{training.id}" do %>

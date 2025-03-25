@@ -10,45 +10,56 @@
   </div>
 </div>
 
-  <div class="d-grid gap-2 my-3">
-    <%= link_to "🎧 Last playlist", current_user.trainings.last, class: "btn btn-primary rounded-3 fw-bold green-button" %>
+<div class="d-grid gap-2 my-3">
+  <% if current_user.trainings.any? && current_user.trainings.last.playlists.any? %>
+    <%= link_to "🎧 Last playlist", playlist_path(current_user.trainings.last.playlists.last), class: "btn btn-primary rounded-3 fw-bold green-button" %>
+  <% else %>
+    <p class="text-muted">No playlist available.</p>
+  <% end %>
+
   <%= link_to raw('<span style="color: #3fb950;">🗓️</span> See my previous trainings'), history_trainings_path,
     class: "fw-bold px-4 py-2 rounded-4 border border-2 text-decoration-none centering",
     style: "border-color: #3FB950; color: white; background-color: transparent; font-size: 1rem; width: 85%; text-align: center;" %>
 </div>
 
+<% if @trainings.present? %>
+  <h2 class="text-center my-4 text-light">🏋️‍♂️ My sessions</h2>
 
-  <% if @trainings.present? %>
-    <h2 class="text-center my-4 text-light">🏋️‍♂️ My sessions</h2>
-
-    <div class="container">
-      <% current_user.trainings.order(created_at: :desc).each do |training| %>
-        <div class="card shadow-sm border-0 rounded-4 p-3 mb-3">
-          <div class="d-flex align-items-center justify-content-between">
-            <div class="d-flex align-items-center">
-              <span class="text-danger fs-3 me-3">🏃</span>
-              <h5 class="mb-0 fw-bold"><%= training.name %></h5>
-            </div>
-            <span class="text-muted small"><%= training.created_at.strftime("%d %b %Y %H:%M") %></span>
+  <div class="container">
+    <% current_user.trainings.order(created_at: :desc).each do |training| %>
+      <div class="card shadow-sm border-0 rounded-4 p-3 mb-3">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <span class="text-danger fs-3 me-3">🏃</span>
+            <h5 class="mb-0 fw-bold"><%= training.name %></h5>
           </div>
+          <span class="text-muted small"><%= training.created_at.strftime("%d %b %Y %H:%M") %></span>
+        </div>
 
-          <div class="mt-2">
-            <p class="text-muted small mb-1"><strong>⏳ Duration:</strong> <%= training.training_duration %> min</p>
-            <p class="text-muted small mb-1"><strong>🎵 Genre:</strong> <%= training.music_genre %></p>
-            <p class="text-muted small"><strong>⚡ Speed:</strong> <%= training.average_speed %></p>
-          </div>
+        <div class="mt-2">
+          <p class="text-muted small mb-1"><strong>⏳ Duration:</strong> <%= training.training_duration %> min</p>
+          <p class="text-muted small mb-1"><strong>🎵 Genre:</strong> <%= training.music_genre %></p>
+          <p class="text-muted small"><strong>⚡ Speed:</strong> <%= training.average_speed %></p>
+        </div>
 
-          <div class="text-end">
-            <%= link_to toggle_favorite_training_path(training), method: :patch, remote: true, class: "favorite-icon", id: "favorite-icon-#{training.id}" do %>
-              <i class="fa<%= training.favorite_playlist? ? 's' : 'r' %> fa-heart text-danger fs-3"></i>
+        <% if training.playlists.any? %>
+          <div class="mt-3">
+            <% training.playlists.each do |playlist| %>
+              <%= link_to "playlist", playlist_path(playlist), class: "btn btn-primary btn-link" %><br>
             <% end %>
           </div>
-        </div>
-      <% end %>
-    </div>
-  <% else %>
-    <p class="text-center text-muted mt-3">No training Available.</p>
-  <% end %>
-</div>
+        <% else %>
+          <p class="text-muted small">No playlist available for this training.</p>
+        <% end %>
 
-.
+        <div class="text-end">
+          <%= link_to toggle_favorite_training_path(training), method: :patch, remote: true, class: "favorite-icon", id: "favorite-icon-#{training.id}" do %>
+            <i class="fa<%= training.favorite_playlist? ? 's' : 'r' %> fa-heart text-danger fs-3"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-center text-muted mt-3">No training Available.</p>
+<% end %>
