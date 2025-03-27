@@ -21,18 +21,18 @@
 
     <!-- Boutons mis à jour avec icônes, style et animation -->
     <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mt-4 w-100">
-      <%= link_to edit_training_path(@training),
-            class: "btn btn-danger btn-lg fw-bold action-btn d-flex align-items-center justify-content-center gap-2" do %>
-        <i class="fas fa-edit"></i>
-        Edit
-      <% end %>
+  <%= link_to edit_training_path(@training),
+        class: "btn-spotify btn-blue" do %>
+    <i class="fas fa-edit"></i> Edit
+  <% end %>
 
-      <%= button_to confirm_training_path(@training),
-            method: :post,
-            class: "btn btn-success btn-lg fw-bold action-btn d-flex align-items-center justify-content-center gap-2" do %>
-        <i class="fas fa-check-circle"></i>
-        Confirm
-      <% end %>
-    </div>
+  <%= button_to confirm_training_path(@training),
+        method: :post,
+        class: "btn-spotify btn-green" do %>
+    <i class="fas fa-check-circle"></i> Confirm
+  <% end %>
+</div>
+
+
   </div>
 </div>
