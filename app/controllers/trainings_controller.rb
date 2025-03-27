@@ -84,7 +84,6 @@ end
       #if @playlist.respond_to?(:spotify_uri) && @playlist.spotify_uri.present?
       # @training.update(spotify_uri: @playlist.spotify_uri)
 
-
       flash[:notice] = "Your playlist is ready, enjoy your session!"
     rescue StandardError => e
       Rails.logger.error "Error while creating your playlist: #{e.message}"
