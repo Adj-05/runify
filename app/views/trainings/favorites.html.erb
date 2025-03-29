@@ -2,33 +2,42 @@
 
 <div class="container">
   <% @favorite_trainings.each do |training| %>
-    <div class="card shadow-sm border-0 rounded-4 p-3 mb-3">
-      <div class="d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center">
+    <div class="card shadow-sm border-0 rounded-4 p-4 mb-4">
+      <!-- Header -->
+      <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+        <div class="d-flex align-items-center mb-2 mb-md-0">
           <span class="text-danger fs-3 me-3">🏃</span>
           <h5 class="mb-0 fw-bold"><%= training.name %></h5>
         </div>
         <span class="text-muted small"><%= training.created_at.strftime("%d %b %Y %H:%M") %></span>
       </div>
 
-      <div class="mt-2">
+      <!-- Infos -->
+      <div class="mt-3">
         <p class="text-muted small mb-1"><strong>⏳ Duration:</strong> <%= training.training_duration %> min</p>
         <p class="text-muted small mb-1"><strong>🎵 Genre:</strong> <%= training.music_genre %></p>
         <p class="text-muted small"><strong>⚡ Speed:</strong> <%= training.average_speed %></p>
       </div>
-              <% if training.playlists.any? %>
-          <div class="mt-3">
-            <% training.playlists.each do |playlist| %>
-              <%= link_to "playlist", playlist_path(playlist), class: "btn btn-primary btn-link" %><br>
-            <% end %>
-          </div>
-        <% else %>
-          <p class="text-muted small">No playlist available for this training.</p>
-        <% end %>
 
-      <div class="text-end">
-        <%= link_to toggle_favorite_training_path(training), method: :patch, remote: true, class: "favorite-icon", id: "favorite-icon-#{training.id}" do %>
-          <i class="fa<%= training.favorite_playlist? ? 's' : 'r' %> fa-heart text-danger fs-3"></i>
+      <!-- Playlist Buttons -->
+      <% if training.playlists.any? %>
+        <div class="mt-3 btn-spotify-wrap">
+          <% training.playlists.each do |playlist| %>
+            <%= link_to "🎵 Playlist", playlist_path(playlist), class: "btn-spotify btn-blue" %>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="text-muted small mt-3 text-center">No playlist available for this training.</p>
+      <% end %>
+
+      <!-- Favorite Icon -->
+      <div class="d-flex justify-content-end mt-4">
+        <%= link_to toggle_favorite_training_path(training),
+                    method: :patch,
+                    remote: true,
+                    class: "icon-btn icon-fav",
+                    id: "favorite-icon-#{training.id}" do %>
+          <i class="fa<%= training.favorite_playlist? ? 's' : 'r' %> fa-heart"></i>
         <% end %>
       </div>
     </div>

@@ -1,8 +1,9 @@
+<!-- Profile Card -->
 <div class="container mt-4">
-  <div class="card card-centered">
-    <h5 class="mt-2 fw-bold text-dark text-center"><%= current_user.spotify_name %></h5>
+  <div class="card shadow-sm rounded-4 text-center py-4 px-3">
+    <h5 class="fw-bold text-dark mb-3"><%= current_user.spotify_name %></h5>
 
-    <div class="position-relative d-flex justify-content-center my-3">
+    <div class="position-relative d-flex justify-content-center mb-2">
       <div class="progress-circle white-circle d-flex align-items-center justify-content-center">
         <h4 class="fw-bold text-dark"><%= current_user.trainings.count %>🔥</h4>
       </div>
@@ -10,63 +11,74 @@
   </div>
 </div>
 
-<div class="d-grid gap-2 my-3">
+<!-- Top Buttons -->
+<div class="d-grid gap-3 my-4">
   <% if current_user.trainings.any? && current_user.trainings.last.playlists.any? %>
-    <%= link_to "🎧 Last playlist", playlist_path(current_user.trainings.last.playlists.last), class: "btn btn-primary rounded-3 fw-bold green-button" %>
+    <%= link_to "🎧 Last playlist", playlist_path(current_user.trainings.last.playlists.last),
+          class: "btn-spotify btn-green mx-auto w-75" %>
   <% else %>
-    <p class="text-muted">No playlist available.</p>
+    <p class="text-muted text-center">No playlist available.</p>
   <% end %>
 
-  <%= link_to raw('<span style="color: #3fb950;">🗓️</span> See my previous trainings'), history_trainings_path,
-      class: "fw-bold px-4 py-2 rounded-4 border border-2 text-decoration-none centering",
-      style: "border-color: #3FB950; color: white; background-color: transparent; font-size: 1rem; width: 85%; text-align: center;" %>
+  <%= link_to raw('<i class="fa-regular fa-calendar"></i> My previous trainings'),
+        history_trainings_path,
+        class: "btn-spotify btn-outline mx-auto w-75" %>
 </div>
 
+<!-- Sessions List -->
 <% if @trainings.present? %>
   <h2 class="text-center my-4 text-light">🏋️‍♂️ My sessions</h2>
 
   <div class="container">
     <% current_user.trainings.order(created_at: :desc).each do |training| %>
-      <div class="card shadow-sm border-0 rounded-4 p-3 mb-3">
-        <div class="d-flex align-items-center justify-content-between">
-          <div class="d-flex align-items-center">
+      <div class="card shadow-sm border-0 rounded-4 p-4 mb-4">
+        <!-- Header -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+          <div class="d-flex align-items-center mb-2 mb-md-0">
             <span class="text-danger fs-3 me-3">🏃</span>
             <h5 class="mb-0 fw-bold"><%= training.name %></h5>
           </div>
           <span class="text-muted small"><%= training.created_at.strftime("%d %b %Y %H:%M") %></span>
         </div>
 
-        <div class="mt-2">
+        <!-- Infos -->
+        <div class="mt-3">
           <p class="text-muted small mb-1"><strong>⏳ Duration:</strong> <%= training.training_duration %> min</p>
           <p class="text-muted small mb-1"><strong>🎵 Genre:</strong> <%= training.music_genre %></p>
           <p class="text-muted small"><strong>⚡ Speed:</strong> <%= training.average_speed %></p>
         </div>
 
-        <% if training.playlists.any? %>
-          <div class="mt-3">
-            <% training.playlists.each do |playlist| %>
-              <%= link_to "playlist", playlist_path(playlist), class: "btn btn-primary btn-link" %><br>
-            <% end %>
-          </div>
-        <% else %>
-          <p class="text-muted small">No playlist available for this training.</p>
-        <% end %>
+       <!-- Playlist buttons dans chaque card training -->
+<% if training.playlists.any? %>
+  <div class="mt-3 btn-spotify-wrap">
+    <% training.playlists.each do |playlist| %>
+      <%= link_to "🎵 Playlist", playlist_path(playlist),
+            class: "btn-spotify btn-blue" %>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-muted small mt-3 text-center">No playlist available for this training.</p>
+<% end %>
 
-        <div class="text-end d-flex justify-content-end align-items-center gap-3">
-          <!-- Icône Favori -->
-          <%= button_to toggle_favorite_training_path(training), method: :patch,class: "favorite-icon", id: "favorite-icon-#{training.id}" do %>
-            <i class="fa<%= training.favorite_playlist? ? 's' : 'r' %> fa-heart text-danger fs-3"></i>
-          <% end %>
+<!-- New Spotify-style icon buttons -->
+<div class="d-flex justify-content-between align-items-center mt-4">
+  <!-- Favorite button -->
+  <%= button_to toggle_favorite_training_path(training), method: :patch, class: "icon-btn icon-fav" do %>
+    <i class="fa<%= training.favorite_playlist? ? 's' : 'r' %> fa-heart"></i>
+  <% end %>
 
-          <!-- Icône Poubelle -->
-          <%= button_to training_path(training), method: :delete, data: { confirm: "Supprimer cette session ?" }, class: "text-danger fs-5" do %>
-            <i class="fa fa-trash"></i>
-          <% end %>
-        </div>
+  <!-- Delete button -->
+  <%= button_to training_path(training),
+        method: :delete,
+        data: { confirm: "Supprimer cette session ?" },
+        class: "icon-btn icon-trash" do %>
+    <i class="fa fa-trash"></i>
+  <% end %>
+</div>
 
       </div>
     <% end %>
   </div>
 <% else %>
-  <p class="text-center text-muted mt-3">No training Available.</p>
+  <p class="text-center text-muted mt-4">No training available.</p>
 <% end %>
