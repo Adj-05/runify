@@ -7,13 +7,15 @@
 <% if @playlist.spotify_id %>
   <iframe
     id="spotifyPlayer"
-    src="https://open.spotify.com/embed/playlist/<%=@playlist.spotify_id%>"
+    src="https://open.spotify.com/embed/playlist/<%=@playlist.spotify_id %>"
     width="100%"
     height="500"
     frameborder="0"
     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
     style="display: none;"
-    onload="showIframe()">
+    onload="showIframe()"
+    data-reload-counter="0"
+    >
   </iframe>
 <% end %>
 
@@ -36,7 +38,21 @@
 
 <script>
   function showIframe() {
-    document.getElementById("loader").style.display = "none";
-    document.getElementById("spotifyPlayer").style.display = "block";
+    const player = document.getElementById("spotifyPlayer")
+
+  setTimeout(() => {
+    const count = parseInt(player.dataset.reloadCounter)
+
+
+    if (count === 1) {
+      document.getElementById("loader").style.display = "none";
+      player.style.display = "block";
+      return
+    }
+
+    player.src = player.src
+
+    player.dataset.reloadCounter = count + 1
+  }, 350);
   }
 </script>
