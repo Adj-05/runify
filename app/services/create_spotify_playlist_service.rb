@@ -27,9 +27,11 @@ class CreateSpotifyPlaylistService < ApplicationService
   private
 
   def deezer_infos_to_spotify_uris
-    @tracks_infos.map do |track_infos|
+    result = @tracks_infos.map do |track_infos|
       SearchSpotifyTrackUriService.call(@user, name: track_infos[:title], album: track_infos[:album], artist: track_infos[:artist])
     end
+    p "//////////////////////////////////////////////#{result} #{@track_infos}"
+    result
   end
 
   def create_playlist

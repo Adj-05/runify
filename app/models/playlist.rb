@@ -5,8 +5,8 @@ class Playlist < ApplicationRecord
   accepts_nested_attributes_for :musics
 
   class << self
-    def initialize_from_api(user:, training:, name:, bpm_min:, bpm_max:, dur_min:, dur_max:, count:, **attributes)
-      track_infos = GetDeezerTracksService.call(bpm_min:, bpm_max:, dur_min:, dur_max:, count:)
+    def initialize_from_api(user:, training:, name:, bpm_min:, bpm_max:, count:, **attributes)
+      track_infos = GetDeezerTracksService.call(bpm_min:, bpm_max:, count:)
       playlist = CreateSpotifyPlaylistService.call(user, name, track_infos)
 
       playlist_attributes = {
@@ -21,13 +21,13 @@ class Playlist < ApplicationRecord
       @playlist = Playlist.new(playlist_attributes)
     end
 
-    def create_from_api(user:, name:, bpm_min:, bpm_max:, dur_min:, dur_max:, count:, **attributes)
-      initialize_from_api(user:, name:, bpm_min:, bpm_max:, dur_min:, dur_max:, count:, **attributes).save
+    def create_from_api(user:, name:, bpm_min:, bpm_max:, count:, **attributes)
+      initialize_from_api(user:, name:, bpm_min:, bpm_max:, count:, **attributes).save
       @playlist
     end
 
-    def create_from_api!(user:, name:, bpm_min:, bpm_max:, dur_min:, dur_max:, count:, **attributes)
-      initialize_from_api(user:, name:, bpm_min:, bpm_max:, dur_min:, dur_max:, count:, **attributes).save!
+    def create_from_api!(user:, name:, bpm_min:, bpm_max:,  count:, **attributes)
+      initialize_from_api(user:, name:, bpm_min:, bpm_max:, count:, **attributes).save!
       @playlist
     end
 
