@@ -21,18 +21,20 @@
 
     <!-- Boutons mis à jour avec icônes, style et animation -->
     <div class="d-flex flex-column flex-sm-row justify-content-center gap-3 mt-4 w-100">
-  <%= link_to edit_training_path(@training),
-        class: "btn-spotify btn-blue" do %>
-    <i class="fas fa-edit"></i> Edit
-  <% end %>
-
-  <%= button_to confirm_training_path(@training),
-        method: :post,
-        class: "btn-spotify btn-green" do %>
-    <i class="fas fa-check-circle"></i> Confirm
-  <% end %>
-</div>
-
+      <%= link_to edit_training_path(@training), class: "btn-spotify btn-blue" do %>
+        <i class="fas fa-edit"></i> Edit
+      <% end %>
+      <div data-controller="loader">
+        <%= button_to confirm_training_path(@training), class: "btn-spotify btn-green", form: { data: { action: "submit->loader#start" } } do %>
+          <div data-loader-target="defaultContent">
+            <i class="fas fa-check-circle"></i> Confirm
+          </div>
+          <div data-loader-target="loadingContent" class="d-none">
+            Loading...
+          </div>
+        <% end %>
+      </div>
+    </div>
 
   </div>
 </div>
