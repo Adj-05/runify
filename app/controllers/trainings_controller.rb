@@ -15,25 +15,13 @@ class TrainingsController < ApplicationController
     @trainings = Training.where(date: start_date.beginning_of_month..start_date.end_of_month)
   end
 
+  def show
+    @training = Training.find(params[:id])
+  end
 
-def show
-  @training = Training.find(params[:id])
-end
-
-def set_default_date
-  self.date ||= created_at.to_date
-end
-# def create
-#   @training = Training.new(training_params)
-#   @training.user_id = current_user.id
-
-#   if @training.save
-#     redirect_to preview_training_path(@training), notice: "Confirm or edit your choices."
-#   else
-#     puts @training.errors.messages
-#     render :new, status: :unprocessable_entity
-#   end
-# end
+  def set_default_date
+    self.date ||= created_at.to_date
+  end
 
   def toggle_favorite
     @training.update(favorite_playlist: !@training.favorite_playlist)
@@ -46,7 +34,6 @@ end
   def favorites
     @favorite_trainings = Training.where(favorite_playlist: true)
   end
-
 
   def create
     @training = Training.new(training_params)
@@ -66,7 +53,7 @@ end
 
   def confirm
     @training = Training.find(params[:id])
-    @training.update(confirmed: true) # Assurez-vous que la colonne "confirmed" existe dans la DB
+    @training.update(confirmed: true)
 
     begin
       @playlist = Playlist.create_from_api!(
@@ -76,13 +63,7 @@ end
         training: @training,
         bpm_min: @training.bpm_min,
         bpm_max: @training.bpm_max,
-        dur_min: @training.training_duration,
-        dur_max: @training.training_duration
       )
-
-      # Supposons que l'API renvoie une URI Spotify pour la playlist
-      #if @playlist.respond_to?(:spotify_uri) && @playlist.spotify_uri.present?
-      # @training.update(spotify_uri: @playlist.spotify_uri)
 
       flash[:notice] = "Your playlist is ready, enjoy your session!"
     rescue StandardError => e
@@ -106,22 +87,11 @@ end
     end
   end
 
-  def destroy
-    @training = Training.find(params[:id])
-    @training.destroy
-    redirect_to trainings_path, status: :see_other, notice: "Training successfully deleted!"
-  end
-
-
   private
 
   def training_params
     params.require(:training).permit(:average_speed, :training_duration, :music_genre, :name, :date, :start_time)
   end
-
-  # def set_default_start_time
-  #   self.start_time ||= Time.current # Définit la date actuelle si elle est vide
-  # end
 
   def set_training
     @training = Training.find_by(id: params[:id])
