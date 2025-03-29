@@ -71,6 +71,8 @@ class TrainingsController < ApplicationController
       flash[:alert] = "Your playlist couldn't be created, but your training has been saved."
     end
 
+    sleep 5
+
     redirect_to playlist_path(@playlist)
   end
 
