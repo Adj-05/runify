@@ -71,7 +71,7 @@ class TrainingsController < ApplicationController
       flash[:alert] = "Your playlist couldn't be created, but your training has been saved."
     end
 
-    sleep 5
+    sleep ENV["PLAYLIST_TIMEOUT"].to_i
 
     redirect_to playlist_path(@playlist)
   end
